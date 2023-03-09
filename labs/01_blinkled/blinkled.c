@@ -21,8 +21,8 @@
 // Registers bit tables
 //------------------------
 
-#define BITS( __hi, __lo) ( (~0U << __lo) & (~0U >> (31 - __hi)) )
-#define BIT( __pos) ( 1U << __pos )
+#define BITS( __hi, __lo) ( (~0U << (__lo)) & (~0U >> (31 - (__hi))) )
+#define BIT( __pos) ( 1U << (__pos) )
 
 //      bits group                        hi  lo
 #define RCC_CR_HSEON                BIT (     16 )
