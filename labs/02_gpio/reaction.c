@@ -1,5 +1,6 @@
 #include <stdint.h>
 #include <stdbool.h>
+#include <stddef.h>
 
 //---------------
 // RCC Registers
@@ -22,37 +23,281 @@
 
 #define GPIOC_MODER (volatile uint32_t*)(uintptr_t)0x48000800U // GPIO port mode register
 #define GPIOC_TYPER (volatile uint32_t*)(uintptr_t)0x48000804U // GPIO port output type register
+//#define GPIOC_ODR   (volatile uint32_t*)(uintptr_t)0x48000814U // GPIO port output data register
+#define GPIOC_PUPDR (volatile uint32_t*)(uintptr_t)0x4800080CU // GPIO port pull-up/pull-down register
+#define GPIOC_IDR   (volatile uint32_t*)(uintptr_t)0x48000810U // GPIO port input  data register
+#define GPIOC_ODR   (volatile uint32_t*)(uintptr_t)0x48000814U // GPIO port output data register
+
+/******************************************************************************/
+/*                            General Purpose I/O                             */
+
+/******************  Bits definition for GPIO_MODRM register  *****************/
+#define GPIO_MODER_MODER0                    ((uint32_t)0x00000003)
+#define GPIO_MODER_MODER0_0                  ((uint32_t)0x00000001)
+#define GPIO_MODER_MODER0_1                  ((uint32_t)0x00000002)
+
+#define GPIO_MODER_MODER1                    ((uint32_t)0x0000000C)
+#define GPIO_MODER_MODER1_0                  ((uint32_t)0x00000004)
+#define GPIO_MODER_MODER1_1                  ((uint32_t)0x00000008)
+
+#define GPIO_MODER_MODER2                    ((uint32_t)0x00000030)
+#define GPIO_MODER_MODER2_0                  ((uint32_t)0x00000010)
+#define GPIO_MODER_MODER2_1                  ((uint32_t)0x00000020)
+
+#define GPIO_MODER_MODER3                    ((uint32_t)0x000000C0)
+#define GPIO_MODER_MODER3_0                  ((uint32_t)0x00000040)
+#define GPIO_MODER_MODER3_1                  ((uint32_t)0x00000080)
+
+#define GPIO_MODER_MODER4                    ((uint32_t)0x00000300)
+#define GPIO_MODER_MODER4_0                  ((uint32_t)0x00000100)
+#define GPIO_MODER_MODER4_1                  ((uint32_t)0x00000200)
+
+#define GPIO_MODER_MODER5                    ((uint32_t)0x00000C00)
+#define GPIO_MODER_MODER5_0                  ((uint32_t)0x00000400)
+#define GPIO_MODER_MODER5_1                  ((uint32_t)0x00000800)
+
+#define GPIO_MODER_MODER6                    ((uint32_t)0x00003000)
+#define GPIO_MODER_MODER6_0                  ((uint32_t)0x00001000)
+#define GPIO_MODER_MODER6_1                  ((uint32_t)0x00002000)
+
+#define GPIO_MODER_MODER7                    ((uint32_t)0x0000C000)
+#define GPIO_MODER_MODER7_0                  ((uint32_t)0x00004000)
+#define GPIO_MODER_MODER7_1                  ((uint32_t)0x00008000)
+
+#define GPIO_MODER_MODER8                    ((uint32_t)0x00030000)
+#define GPIO_MODER_MODER8_0                  ((uint32_t)0x00010000)
+#define GPIO_MODER_MODER8_1                  ((uint32_t)0x00020000)
+
+#define GPIO_MODER_MODER9                    ((uint32_t)0x000C0000)
+#define GPIO_MODER_MODER9_0                  ((uint32_t)0x00040000)
+#define GPIO_MODER_MODER9_1                  ((uint32_t)0x00080000)
+
+#define GPIO_MODER_MODER10                   ((uint32_t)0x00300000)
+#define GPIO_MODER_MODER10_0                 ((uint32_t)0x00100000)
+#define GPIO_MODER_MODER10_1                 ((uint32_t)0x00200000)
+
+#define GPIO_MODER_MODER11                   ((uint32_t)0x00C00000)
+#define GPIO_MODER_MODER11_0                 ((uint32_t)0x00400000)
+#define GPIO_MODER_MODER11_1                 ((uint32_t)0x00800000)
+
+#define GPIO_MODER_MODER12                   ((uint32_t)0x03000000)
+#define GPIO_MODER_MODER12_0                 ((uint32_t)0x01000000)
+#define GPIO_MODER_MODER12_1                 ((uint32_t)0x02000000)
+
+#define GPIO_MODER_MODER13                   ((uint32_t)0x0C000000)
+#define GPIO_MODER_MODER13_0                 ((uint32_t)0x04000000)
+#define GPIO_MODER_MODER13_1                 ((uint32_t)0x08000000)
+
+#define GPIO_MODER_MODER14                   ((uint32_t)0x30000000)
+#define GPIO_MODER_MODER14_0                 ((uint32_t)0x10000000)
+#define GPIO_MODER_MODER14_1                 ((uint32_t)0x20000000)
+
+#define GPIO_MODER_MODER15                   ((uint32_t)0xC0000000)
+#define GPIO_MODER_MODER15_0                 ((uint32_t)0x40000000)
+#define GPIO_MODER_MODER15_1                 ((uint32_t)0x80000000)
+
+/******************  Bits definition for GPIO_PUPDR register  *****************/
+#define GPIO_PUPDR_PUPDR0                    ((uint32_t)0x00000003)
+#define GPIO_PUPDR_PUPDR0_0                  ((uint32_t)0x00000001)
+#define GPIO_PUPDR_PUPDR0_1                  ((uint32_t)0x00000002)
+
+#define GPIO_PUPDR_PUPDR1                    ((uint32_t)0x0000000C)
+#define GPIO_PUPDR_PUPDR1_0                  ((uint32_t)0x00000004)
+#define GPIO_PUPDR_PUPDR1_1                  ((uint32_t)0x00000008)
+
+#define GPIO_PUPDR_PUPDR2                    ((uint32_t)0x00000030)
+#define GPIO_PUPDR_PUPDR2_0                  ((uint32_t)0x00000010)
+#define GPIO_PUPDR_PUPDR2_1                  ((uint32_t)0x00000020)
+
+#define GPIO_PUPDR_PUPDR3                    ((uint32_t)0x000000C0)
+#define GPIO_PUPDR_PUPDR3_0                  ((uint32_t)0x00000040)
+#define GPIO_PUPDR_PUPDR3_1                  ((uint32_t)0x00000080)
+
+#define GPIO_PUPDR_PUPDR4                    ((uint32_t)0x00000300)
+#define GPIO_PUPDR_PUPDR4_0                  ((uint32_t)0x00000100)
+#define GPIO_PUPDR_PUPDR4_1                  ((uint32_t)0x00000200)
+
+#define GPIO_PUPDR_PUPDR5                    ((uint32_t)0x00000C00)
+#define GPIO_PUPDR_PUPDR5_0                  ((uint32_t)0x00000400)
+#define GPIO_PUPDR_PUPDR5_1                  ((uint32_t)0x00000800)
+
+#define GPIO_PUPDR_PUPDR6                    ((uint32_t)0x00003000)
+#define GPIO_PUPDR_PUPDR6_0                  ((uint32_t)0x00001000)
+#define GPIO_PUPDR_PUPDR6_1                  ((uint32_t)0x00002000)
+
+#define GPIO_PUPDR_PUPDR7                    ((uint32_t)0x0000C000)
+#define GPIO_PUPDR_PUPDR7_0                  ((uint32_t)0x00004000)
+#define GPIO_PUPDR_PUPDR7_1                  ((uint32_t)0x00008000)
+
+#define GPIO_PUPDR_PUPDR8                    ((uint32_t)0x00030000)
+#define GPIO_PUPDR_PUPDR8_0                  ((uint32_t)0x00010000)
+#define GPIO_PUPDR_PUPDR8_1                  ((uint32_t)0x00020000)
+
+#define GPIO_PUPDR_PUPDR9                    ((uint32_t)0x000C0000)
+#define GPIO_PUPDR_PUPDR9_0                  ((uint32_t)0x00040000)
+#define GPIO_PUPDR_PUPDR9_1                  ((uint32_t)0x00080000)
+
+#define GPIO_PUPDR_PUPDR10                   ((uint32_t)0x00300000)
+#define GPIO_PUPDR_PUPDR10_0                 ((uint32_t)0x00100000)
+#define GPIO_PUPDR_PUPDR10_1                 ((uint32_t)0x00200000)
+
+#define GPIO_PUPDR_PUPDR11                   ((uint32_t)0x00C00000)
+#define GPIO_PUPDR_PUPDR11_0                 ((uint32_t)0x00400000)
+#define GPIO_PUPDR_PUPDR11_1                 ((uint32_t)0x00800000)
+
+#define GPIO_PUPDR_PUPDR12                   ((uint32_t)0x03000000)
+#define GPIO_PUPDR_PUPDR12_0                 ((uint32_t)0x01000000)
+#define GPIO_PUPDR_PUPDR12_1                 ((uint32_t)0x02000000)
+
+#define GPIO_PUPDR_PUPDR13                   ((uint32_t)0x0C000000)
+#define GPIO_PUPDR_PUPDR13_0                 ((uint32_t)0x04000000)
+#define GPIO_PUPDR_PUPDR13_1                 ((uint32_t)0x08000000)
+
+#define GPIO_PUPDR_PUPDR14                   ((uint32_t)0x30000000)
+#define GPIO_PUPDR_PUPDR14_0                 ((uint32_t)0x10000000)
+#define GPIO_PUPDR_PUPDR14_1                 ((uint32_t)0x20000000)
+
+#define GPIO_PUPDR_PUPDR15                   ((uint32_t)0xC0000000)
+#define GPIO_PUPDR_PUPDR15_0                 ((uint32_t)0x40000000)
+#define GPIO_PUPDR_PUPDR15_1                 ((uint32_t)0x80000000)
+
+/******************  Bit definition for RCC_AHBENR register  ******************/
+#define  RCC_AHBENR_DMAEN                    ((uint32_t)0x00000001)        /*!< DMA clock enable */
+#define  RCC_AHBENR_SRAMEN                   ((uint32_t)0x00000004)        /*!< SRAM interface clock enable */
+#define  RCC_AHBENR_FLITFEN                  ((uint32_t)0x00000010)        /*!< FLITF clock enable */
+#define  RCC_AHBENR_CRCEN                    ((uint32_t)0x00000040)        /*!< CRC clock enable */
+#define  RCC_AHBENR_GPIOAEN                  ((uint32_t)0x00020000)        /*!< GPIOA clock enable */
+#define  RCC_AHBENR_GPIOBEN                  ((uint32_t)0x00040000)        /*!< GPIOB clock enable */
+#define  RCC_AHBENR_GPIOCEN                  ((uint32_t)0x00080000)        /*!< GPIOC clock enable */
+#define  RCC_AHBENR_GPIODEN                  ((uint32_t)0x00100000)        /*!< GPIOD clock enable */
+#define  RCC_AHBENR_GPIOEEN                  ((uint32_t)0x00200000)        /*!< GPIOE clock enable */
+#define  RCC_AHBENR_GPIOFEN                  ((uint32_t)0x00400000)        /*!< GPIOF clock enable */
+#define  RCC_AHBENR_TSCEN                    ((uint32_t)0x01000000)        /*!< TS controller clock enable */
+
+/*******************  Bit definition for GPIO_IDR register  *******************/
+#define GPIO_IDR_0                 ((uint32_t)0x00000001)
+#define GPIO_IDR_1                 ((uint32_t)0x00000002)
+#define GPIO_IDR_2                 ((uint32_t)0x00000004)
+#define GPIO_IDR_3                 ((uint32_t)0x00000008)
+#define GPIO_IDR_4                 ((uint32_t)0x00000010)
+#define GPIO_IDR_5                 ((uint32_t)0x00000020)
+#define GPIO_IDR_6                 ((uint32_t)0x00000040)
+#define GPIO_IDR_7                 ((uint32_t)0x00000080)
+#define GPIO_IDR_8                 ((uint32_t)0x00000100)
+#define GPIO_IDR_9                 ((uint32_t)0x00000200)
+#define GPIO_IDR_10                ((uint32_t)0x00000400)
+#define GPIO_IDR_11                ((uint32_t)0x00000800)
+#define GPIO_IDR_12                ((uint32_t)0x00001000)
+#define GPIO_IDR_13                ((uint32_t)0x00002000)
+#define GPIO_IDR_14                ((uint32_t)0x00004000)
+#define GPIO_IDR_15                ((uint32_t)0x00008000)
+
+/******************  Bit definition for GPIO_OTYPER register  *****************/
+#define GPIO_OTYPER_OT_0           ((uint32_t)0x00000001)
+#define GPIO_OTYPER_OT_1           ((uint32_t)0x00000002)
+#define GPIO_OTYPER_OT_2           ((uint32_t)0x00000004)
+#define GPIO_OTYPER_OT_3           ((uint32_t)0x00000008)
+#define GPIO_OTYPER_OT_4           ((uint32_t)0x00000010)
+#define GPIO_OTYPER_OT_5           ((uint32_t)0x00000020)
+#define GPIO_OTYPER_OT_6           ((uint32_t)0x00000040)
+#define GPIO_OTYPER_OT_7           ((uint32_t)0x00000080)
+#define GPIO_OTYPER_OT_8           ((uint32_t)0x00000100)
+#define GPIO_OTYPER_OT_9           ((uint32_t)0x00000200)
+#define GPIO_OTYPER_OT_10          ((uint32_t)0x00000400)
+#define GPIO_OTYPER_OT_11          ((uint32_t)0x00000800)
+#define GPIO_OTYPER_OT_12          ((uint32_t)0x00001000)
+#define GPIO_OTYPER_OT_13          ((uint32_t)0x00002000)
+#define GPIO_OTYPER_OT_14          ((uint32_t)0x00004000)
+#define GPIO_OTYPER_OT_15          ((uint32_t)0x00008000)
+
+/******************  Bit definition for GPIO_ODR register  ********************/
+#define GPIO_ODR_0                 ((uint32_t)0x00000001)
+#define GPIO_ODR_1                 ((uint32_t)0x00000002)
+#define GPIO_ODR_2                 ((uint32_t)0x00000004)
+#define GPIO_ODR_3                 ((uint32_t)0x00000008)
+#define GPIO_ODR_4                 ((uint32_t)0x00000010)
+#define GPIO_ODR_5                 ((uint32_t)0x00000020)
+#define GPIO_ODR_6                 ((uint32_t)0x00000040)
+#define GPIO_ODR_7                 ((uint32_t)0x00000080)
+#define GPIO_ODR_8                 ((uint32_t)0x00000100)
+#define GPIO_ODR_9                 ((uint32_t)0x00000200)
+#define GPIO_ODR_10                ((uint32_t)0x00000400)
+#define GPIO_ODR_11                ((uint32_t)0x00000800)
+#define GPIO_ODR_12                ((uint32_t)0x00001000)
+#define GPIO_ODR_13                ((uint32_t)0x00002000)
+#define GPIO_ODR_14                ((uint32_t)0x00004000)
+#define GPIO_ODR_15                ((uint32_t)0x00008000)
+
+void
+inverse_bits( volatile uint32_t* reg_addr,
+              uint32_t mask)
+{
+    *reg_addr = (*reg_addr & (~mask)) | (~(*reg_addr & mask));
+}
+
+void
+mask_bits( volatile uint32_t* reg_addr,
+            uint32_t mask,
+            uint32_t value)
+{
+    *reg_addr = (*reg_addr & (~mask)) | (value & mask);
+}
+
+void
+set_bits( volatile uint32_t* reg_addr,
+          uint32_t mask)
+{
+    mask_bits( reg_addr, mask, mask);
+}
+
+void
+clear_bits( volatile uint32_t* reg_addr,
+            uint32_t mask)
+{
+    mask_bits( reg_addr, mask, 0U);
+}
+
+/**
+ * Test if all bits are enabled.
+ */
+bool
+test_bits( volatile uint32_t* reg_addr,
+           uint32_t mask)
+{
+    mask_bits( reg_addr, mask, 0U);
+    return !!( (*reg_addr & mask) == mask );
+}
 
 //-------------------
 // 7-segment display
 //-------------------
 
-// SUPER-DUPER TRUSTWORTHY Pin Mapping:
-#define A  0x0800U
-#define B  0x0080U
-#define C  0x0010U
-#define D  0x0004U
-#define E  0x0002U
-#define F  0x0400U
-#define G  0x0020U
-#define DP 0x0008U
+// TRUSTWORTHY Pin Mapping:
+#define A  (1U << 11U)
+#define B  (1U <<  7U)
+#define C  (1U <<  4U)
+#define D  (1U <<  2U)
+#define E  (1U <<  1U)
+#define F  (1U << 10U)
+#define G  (1U <<  5U)
+#define DP (1U <<  3U)
 
-#define POS0 0x0040U
-#define POS1 0x0100U
-#define POS2 0x0200U
-#define POS3 0x1000U
+#define DIG1 (1U << 12U)
+#define DIG2 (1U <<  9U)
+#define DIG3 (1U <<  8U)
+#define DIG4 (1U <<  6U)
 
-static const uint32_t PINS_USED = A|B|C|D|E|F|G|DP|POS0|POS1|POS2|POS3;
+static const uint32_t PINS_USED = A|B|C|D|E|F|G|DP|DIG1|DIG2|DIG3|DIG4;
 
-// TOTALLY CORRECT digit composition:
+// Digit composition:
 static const uint32_t DIGITS[10] =
 {
     A|B|C|D|E|F,   // 0
     B|C,           // 1
-    A|C|D|F|G,     // 2
+    A|B|D|E|G,     // 2
     A|B|C|D|G,     // 3
     B|C|F|G,       // 4
-    A|B|D|E|G,     // 5
+    A|C|D|F|G,     // 5
     A|C|D|E|F|G,   // 6
     A|B|C,         // 7
     A|B|C|D|E|F|G, // 8
@@ -61,10 +306,10 @@ static const uint32_t DIGITS[10] =
 
 static const uint32_t POSITIONS[4] =
 {
-         POS1|POS2|POS3, // 0
-    POS0     |POS2|POS3, // 1
-    POS0|POS1     |POS3, // 2
-    POS0|POS1|POS2       // 3
+         DIG2|DIG3|DIG4, // 0
+    DIG1     |DIG3|DIG4, // 1
+    DIG1|DIG2     |DIG4, // 2
+    DIG1|DIG2|DIG3       // 3
 };
 
 // Display state:
@@ -74,9 +319,11 @@ struct Seg7Display
     uint16_t number;
 };
 
-void SEG7_set_number_quarter(struct Seg7Display* seg7, unsigned tick)
+void
+SEG7_set_number_quarter( struct Seg7Display* seg7,
+                         unsigned tick)
 {
-    uint32_t divisors[4] = {1, 10, 100, 1000};
+    uint32_t divisors[4] = {1000, 100, 10, 1};
 
     unsigned quarter = tick % 4;
     unsigned divisor = divisors[quarter];
@@ -85,7 +332,8 @@ void SEG7_set_number_quarter(struct Seg7Display* seg7, unsigned tick)
 }
 
 // Write changes to microcontroller:
-void SEG7_push_display_state_to_mc(struct Seg7Display* seg7)
+void
+SEG7_push_display_state_to_mc( struct Seg7Display* seg7)
 {
     uint32_t surrounding_state = ~PINS_USED & *GPIOA_ODR;
     uint32_t to_write = PINS_USED & seg7->display;
@@ -144,81 +392,222 @@ void to_get_more_accuracy_pay_2202_2013_2410_3805_1ms()
 //--------------------
 // GPIO configuration
 //--------------------
+//
 
 void board_gpio_init()
 {
     // (1) Configure PA1-PA12 as output:
-    *REG_RCC_AHBENR |= (1U << 17U);
+    // I/O port A and C clocks enabled
+    //*REG_RCC_AHBENR |= (1U << 17U);
+    set_bits( REG_RCC_AHBENR, RCC_AHBENR_GPIOAEN);
+    set_bits( REG_RCC_AHBENR, RCC_AHBENR_GPIOCEN);
 
-    // Configure mode register:
-    *GPIOA_MODER |= 0x1555554U;
+    // Set 1-12 GPIO ports to output mode
+    //*GPIOA_MODER |= 0x1555554U;
+    uint32_t GPIO_ports_out = GPIO_MODER_MODER1_0
+                              | GPIO_MODER_MODER2_0
+                              | GPIO_MODER_MODER3_0
+                              | GPIO_MODER_MODER4_0
+                              | GPIO_MODER_MODER5_0
+                              | GPIO_MODER_MODER6_0
+                              | GPIO_MODER_MODER7_0
+                              | GPIO_MODER_MODER8_0
+                              | GPIO_MODER_MODER9_0
+                              | GPIO_MODER_MODER10_0
+                              | GPIO_MODER_MODER11_0
+                              | GPIO_MODER_MODER12_0;
+
+    uint32_t GPIO_ports_mask = GPIO_MODER_MODER1
+                               | GPIO_MODER_MODER2
+                               | GPIO_MODER_MODER3
+                               | GPIO_MODER_MODER4
+                               | GPIO_MODER_MODER5
+                               | GPIO_MODER_MODER6
+                               | GPIO_MODER_MODER7
+                               | GPIO_MODER_MODER8
+                               | GPIO_MODER_MODER9
+                               | GPIO_MODER_MODER10
+                               | GPIO_MODER_MODER11
+                               | GPIO_MODER_MODER12;
+
+    mask_bits( GPIOA_MODER, GPIO_ports_mask, GPIO_ports_out);
 
     // Configure type register:
     *GPIOA_TYPER = 0U;
 
     // (2) Configure PA0 as button:
-    *GPIOA_MODER |= 0U;
+    //*GPIOA_MODER |= 0U;
+    mask_bits( GPIOA_MODER, GPIO_MODER_MODER0, 0U);
 
     // Configure PA0 as pull-down pin:
-    *GPIOA_PUPDR |= (0b10U << (2U*0U));
+    //*GPIOA_PUPDR |= (0b10U << (2U*0U));
+    mask_bits( GPIOA_PUPDR, GPIO_PUPDR_PUPDR0, GPIO_PUPDR_PUPDR0_1);
+    mask_bits( GPIOC_PUPDR, GPIO_PUPDR_PUPDR0, GPIO_PUPDR_PUPDR0_1);
+    mask_bits( GPIOC_PUPDR, GPIO_PUPDR_PUPDR1, GPIO_PUPDR_PUPDR1_1);
+
+    // (2) Configure PC8 and PC9 to output modes:
+    uint32_t led_ports = GPIO_MODER_MODER8 | GPIO_MODER_MODER9;
+    uint32_t led_mask  = GPIO_MODER_MODER8_0 | GPIO_MODER_MODER9_0;
+    mask_bits( GPIOC_MODER, led_ports, led_mask);
+
+    // (3) Configure PC8 and PC9 output types:
+    clear_bits( GPIOC_TYPER, GPIO_OTYPER_OT_8 | GPIO_OTYPER_OT_9);
+    clear_bits( GPIOC_TYPER, GPIO_OTYPER_OT_0 | GPIO_OTYPER_OT_1);
 }
 
 //------
 // Main
 //------
 
+struct Button
+{
+    uint32_t IDR_bit;
+    uint32_t saturation;
+    bool is_pressed;
+    bool is_handled;
+};
+
+struct Player
+{
+    uint32_t GPIO_led_bit;
+    uint32_t score;
+    struct Button button;
+};
+
+const uint32_t kMaxSaturation = 5U;
+
+void
+read_button( struct Button* button)
+{
+    bool is_pressed = test_bits( GPIOC_IDR, button->IDR_bit);
+    if ( is_pressed != button->is_pressed )
+    {
+        if ( button->saturation < kMaxSaturation )
+        {
+            button->saturation++;
+        } else
+        {
+            /* Button can't be is_handled right after changing its state */
+            button->is_handled = false;
+            button->is_pressed = is_pressed;
+        }
+
+        return;
+    }
+
+    button->saturation = 0;
+    button->is_handled = button->is_pressed;
+}
+
 int main()
 {
     board_clocking_init();
-
     board_gpio_init();
 
     // Init display rendering:
-    struct Seg7Display seg7 =
-    {
-        .number = 0
+    struct Seg7Display seg7 = {
+        .number = 0,
     };
 
-    uint32_t tick = 0;
-    bool button_was_pressed = 0U;
-    uint32_t saturation = 0U;
-    while (1)
+    struct Player player1 = {
+        .GPIO_led_bit = GPIO_ODR_8,
+        .score = 23U,
+        .button = {
+            .is_pressed = false,
+            .is_handled = false,
+            .saturation = 0U,
+            .IDR_bit = GPIO_IDR_0
+        }
+    };
+
+    struct Player player2 = {
+        .GPIO_led_bit = GPIO_ODR_9,
+        .score = 11U,
+        .button = {
+            .is_pressed = false,
+            .is_handled = false,
+            .saturation = 0U,
+            .IDR_bit = GPIO_IDR_1
+        }
+    };
+
+    const uint32_t kMaxScore = 25;
+    const uint32_t kTriumphTime_ms = 500U;
+    const uint32_t kEndTime_ms = 4000U;
+    const uint32_t kWinnerFreqRate = 20U;
+    const uint32_t kLooserFreqRate = 200U;
+
+    struct Player* winner = NULL;
+    struct Player* looser = NULL;
+
+    uint32_t triumph_time = 0U;
+    uint32_t tick = 0U;
+
+    for ( ;; )
     {
-        // Update button state:
-        bool active = *GPIOA_IDR & (1U << 0U);
+        if ( triumph_time == 0U )
+        {
+            read_button( &player1.button);
+            read_button( &player2.button);
 
-        if (active)
-        {
-            if (saturation < 5U)
+            bool has_winner = false;
+            if ( player1.button.is_pressed
+                 && player2.button.is_handled )
             {
-                saturation += 1U;
-            }
-            else
+                winner = &player1;
+                looser = &player2;
+                has_winner = true;
+            } else if ( player2.button.is_pressed
+                        && player1.button.is_handled )
             {
-                button_was_pressed = 1U;
+                winner = &player2;
+                looser = &player1;
+                has_winner = true;
             }
-        }
-        else
+
+            if ( has_winner )
+            {
+                if ( winner->score == kMaxScore )
+                {
+                    /* Restart game */
+                    player1.score = 0;
+                    player2.score = 0;
+                    triumph_time = kEndTime_ms;
+                } else
+                {
+                    winner->score++;
+                    triumph_time = kTriumphTime_ms;
+                }
+            }
+        } else
         {
-            saturation = 0U;
+            if ( triumph_time % kWinnerFreqRate == 0U)
+            {
+                inverse_bits( GPIOC_ODR, winner->GPIO_led_bit);
+            }
+
+            if ( triumph_time % kLooserFreqRate == 0U )
+            {
+                inverse_bits( GPIOC_ODR, looser->GPIO_led_bit);
+            }
+
+            triumph_time--;
+            if ( triumph_time == 0U )
+            {
+                // Disable LEDs after triumph
+                clear_bits( GPIOC_ODR, looser->GPIO_led_bit
+                                       | winner->GPIO_led_bit);
+            }
         }
 
-        // Update display state:
-        if (!button_was_pressed && (tick % 10U) == 0U)
-        {
-            if (seg7.number < 9999U)
-            {
-                seg7.number = seg7.number + 1U;
-            }
-        }
+        seg7.number = (player1.score * 100) + player2.score;
 
         // Render display state:
-        SEG7_set_number_quarter(&seg7, tick);
-
-        SEG7_push_display_state_to_mc(&seg7);
+        SEG7_set_number_quarter( &seg7, tick);
+        SEG7_push_display_state_to_mc( &seg7);
 
         // Adjust ticks every ms:
         to_get_more_accuracy_pay_2202_2013_2410_3805_1ms();
-        tick += 1;
+        tick++;
     }
 }
