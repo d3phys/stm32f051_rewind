@@ -42,7 +42,7 @@ class bitset(yaml.YAMLObject):
         else:
             high_bit, low_bit = self.mask
             mask = self.bitmask(low_bit, high_bit)
-        string = "#define {:32} 0x{:08X}".format(self.full_name, mask)
+        string = "#define {:32} ((uint32_t)0x{:08X})".format(self.full_name, mask)
         if self.comment:
             string += " /* {} */".format(self.comment)
         string += "\n"
@@ -50,18 +50,14 @@ class bitset(yaml.YAMLObject):
         if len(self.mask) > 1:
             for idx, bit in enumerate(range(low_bit, high_bit + 1)):
                 ident = "{}_{}".format(self.full_name, idx)
-                string += "#define {:<32} 0x{:>08X} /* {} logical bit {} */\n".format(ident, 1 << bit, self.name, idx)
+                string += "#define {:<32} ((uint32_t)0x{:>08X}) /* {} bit {} */\n".format(ident, 1 << bit, self.name, idx)
         return string
 
 parser = argparse.ArgumentParser(
     prog = 'stmgen',
-    description = '''
-Universal stm32 C header files generator
-'''
+    description = '''Universal stm32 C header files generator'''
 )
 
-#parser.add_argument('input',  type=str, help = 'input file name')
-#parser.add_argument('output', type=str, help = 'output file name')
 parser.add_argument('-v', '--verbose', action = 'store_true', help = 'show debug messages')
 
 try:

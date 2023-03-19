@@ -1,0 +1,183 @@
+---
+# GPIO Registers
+
+- !register
+  name: GPIO_MODER
+  comment: GPIO port mode register (GPIOx_MODER) (x = A..F)
+  bits:
+  - !bitset {name: MODER0,  mask: [1, 0] }
+  - !bitset {name: MODER1,  mask: [3, 2] }
+  - !bitset {name: MODER2,  mask: [5, 4] }
+  - !bitset {name: MODER3,  mask: [7, 6] }
+  - !bitset {name: MODER4,  mask: [9, 8] }
+  - !bitset {name: MODER5,  mask: [11, 10] }
+  - !bitset {name: MODER6,  mask: [13, 12] }
+  - !bitset {name: MODER7,  mask: [15, 14] }
+  - !bitset {name: MODER8,  mask: [17, 16] }
+  - !bitset {name: MODER9,  mask: [19, 18] }
+  - !bitset {name: MODER10, mask: [21, 20] }
+  - !bitset {name: MODER11, mask: [23, 22] }
+  - !bitset {name: MODER12, mask: [25, 24] }
+  - !bitset {name: MODER13, mask: [27, 26] }
+  - !bitset {name: MODER14, mask: [29, 28] }
+  - !bitset {name: MODER15, mask: [31, 30] }
+
+- !register
+  name: GPIO_OTYPER
+  comment: GPIO port output type register (GPIOx_OTYPER) (x = A..F)
+  bits:
+    - !bitset {name: OT0,  mask: [0] }
+    - !bitset {name: OT1,  mask: [1] }
+    - !bitset {name: OT2,  mask: [2] }
+    - !bitset {name: OT3,  mask: [3] }
+    - !bitset {name: OT4,  mask: [4] }
+    - !bitset {name: OT5,  mask: [5] }
+    - !bitset {name: OT6,  mask: [6] }
+    - !bitset {name: OT7,  mask: [7] }
+    - !bitset {name: OT8,  mask: [8] }
+    - !bitset {name: OT9,  mask: [9] }
+    - !bitset {name: OT10, mask: [10] }
+    - !bitset {name: OT11, mask: [11] }
+    - !bitset {name: OT12, mask: [12] }
+    - !bitset {name: OT13, mask: [13] }
+    - !bitset {name: OT14, mask: [14] }
+    - !bitset {name: OT15, mask: [15] }
+
+- !register
+  name: GPIO_OSPEEDR
+  comment: GPIO port output speed register (GPIOx_OSPEEDR) (x = A..F)
+  bits:
+  - !bitset {name: OSPEEDR0,  mask: [1, 0] }
+  - !bitset {name: OSPEEDR1,  mask: [3, 2] }
+  - !bitset {name: OSPEEDR2,  mask: [5, 4] }
+  - !bitset {name: OSPEEDR3,  mask: [7, 6] }
+  - !bitset {name: OSPEEDR4,  mask: [9, 8] }
+  - !bitset {name: OSPEEDR5,  mask: [11, 10] }
+  - !bitset {name: OSPEEDR6,  mask: [13, 12] }
+  - !bitset {name: OSPEEDR7,  mask: [15, 14] }
+  - !bitset {name: OSPEEDR8,  mask: [17, 16] }
+  - !bitset {name: OSPEEDR9,  mask: [19, 18] }
+  - !bitset {name: OSPEEDR10, mask: [21, 20] }
+  - !bitset {name: OSPEEDR11, mask: [23, 22] }
+  - !bitset {name: OSPEEDR12, mask: [25, 24] }
+  - !bitset {name: OSPEEDR13, mask: [27, 26] }
+  - !bitset {name: OSPEEDR14, mask: [29, 28] }
+  - !bitset {name: OSPEEDR15, mask: [31, 30] }
+
+- !register
+  name: GPIO_PUPDR
+  comment: GPIO port pull-up/pull-down register (GPIOx_PUPDR) (x = A..F)
+  bits:
+  - !bitset {name: PUPDR0,  mask: [1, 0] }
+  - !bitset {name: PUPDR1,  mask: [3, 2] }
+  - !bitset {name: PUPDR2,  mask: [5, 4] }
+  - !bitset {name: PUPDR3,  mask: [7, 6] }
+  - !bitset {name: PUPDR4,  mask: [9, 8] }
+  - !bitset {name: PUPDR5,  mask: [11, 10] }
+  - !bitset {name: PUPDR6,  mask: [13, 12] }
+  - !bitset {name: PUPDR7,  mask: [15, 14] }
+  - !bitset {name: PUPDR8,  mask: [17, 16] }
+  - !bitset {name: PUPDR9,  mask: [19, 18] }
+  - !bitset {name: PUPDR10, mask: [21, 20] }
+  - !bitset {name: PUPDR11, mask: [23, 22] }
+  - !bitset {name: PUPDR12, mask: [25, 24] }
+  - !bitset {name: PUPDR13, mask: [27, 26] }
+  - !bitset {name: PUPDR14, mask: [29, 28] }
+  - !bitset {name: PUPDR15, mask: [31, 30] }
+
+- !register
+  name: GPIO_IDR
+  comment: GPIO port input data register (GPIOx_IDR) (x = A..F)
+  bits:
+    - !bitset {name: IDR0,  mask: [0] }
+    - !bitset {name: IDR1,  mask: [1] }
+    - !bitset {name: IDR2,  mask: [2] }
+    - !bitset {name: IDR3,  mask: [3] }
+    - !bitset {name: IDR4,  mask: [4] }
+    - !bitset {name: IDR5,  mask: [5] }
+    - !bitset {name: IDR6,  mask: [6] }
+    - !bitset {name: IDR7,  mask: [7] }
+    - !bitset {name: IDR8,  mask: [8] }
+    - !bitset {name: IDR9,  mask: [9] }
+    - !bitset {name: IDR10, mask: [10] }
+    - !bitset {name: IDR11, mask: [11] }
+    - !bitset {name: IDR12, mask: [12] }
+    - !bitset {name: IDR13, mask: [13] }
+    - !bitset {name: IDR14, mask: [14] }
+    - !bitset {name: IDR15, mask: [15] }
+
+- !register
+  name: GPIO_ODR
+  comment: GPIO port output data register (GPIOx_ODR) (x = A..F)
+  bits:
+    - !bitset {name: ODR0,  mask: [0] }
+    - !bitset {name: ODR1,  mask: [1] }
+    - !bitset {name: ODR2,  mask: [2] }
+    - !bitset {name: ODR3,  mask: [3] }
+    - !bitset {name: ODR4,  mask: [4] }
+    - !bitset {name: ODR5,  mask: [5] }
+    - !bitset {name: ODR6,  mask: [6] }
+    - !bitset {name: ODR7,  mask: [7] }
+    - !bitset {name: ODR8,  mask: [8] }
+    - !bitset {name: ODR9,  mask: [9] }
+    - !bitset {name: ODR10, mask: [10] }
+    - !bitset {name: ODR11, mask: [11] }
+    - !bitset {name: ODR12, mask: [12] }
+    - !bitset {name: ODR13, mask: [13] }
+    - !bitset {name: ODR14, mask: [14] }
+    - !bitset {name: ODR15, mask: [15] }
+
+- !register
+  name: RCC_AHBENR
+  comment: AHB peripheral clock enable register (RCC_AHBENR)
+  bits:
+  - !bitset {name: DMAEN,   mask: [0],  comment: DMA clock enable }
+  - !bitset {name: DMA2EN,  mask: [1],  comment: DMA2 clock enable }
+  - !bitset {name: SRAMEN,  mask: [2],  comment: SRAM interface clock enable }
+  - !bitset {name: FLITFEN, mask: [4],  comment: FLITF clock enable }
+  - !bitset {name: CRCEN,   mask: [6],  comment: CRC clock enable }
+  - !bitset {name: IOPAEN,  mask: [17], comment: I/O port A clock enable }
+  - !bitset {name: IOPBEN,  mask: [18], comment: I/O port B clock enable }
+  - !bitset {name: IOPCEN,  mask: [19], comment: I/O port C clock enable }
+  - !bitset {name: IOPDEN,  mask: [20], comment: I/O port D clock enable }
+  - !bitset {name: IOPEEN,  mask: [21], comment: I/O port E clock enable }
+  - !bitset {name: IOPFEN,  mask: [22], comment: I/O port F clock enable }
+  - !bitset {name: TSCEN,   mask: [2],  comment: Touch sensing controller clock enable }
+
+- !register
+  name: RCC_CR
+  comment: Clock control register (RCC_CR)
+  bits:
+  - !bitset {name: HSION,   mask: [0],     comment: HSI clock enable }
+  - !bitset {name: HSIRDY,  mask: [1],     comment: HSI clock ready flag }
+  - !bitset {name: HSITRIM, mask: [7, 3],  comment: HSI clock trimming }
+  - !bitset {name: HSICAL,  mask: [15, 8], comment: HSI clock calibration }
+  - !bitset {name: HSEON,   mask: [16],    comment: HSE clock enable }
+  - !bitset {name: HSERDY,  mask: [17],    comment: HSE clock ready flag }
+  - !bitset {name: HSEBYP,  mask: [18],    comment: HSE crystal oscillator bypass }
+  - !bitset {name: CSSON,   mask: [19],    comment: Clock security system enable }
+  - !bitset {name: PLLON,   mask: [24],    comment: PLL enable }
+  - !bitset {name: PLLRDY,  mask: [25],    comment: PLL clock ready flag }
+
+- !register
+  name: RCC_CFGR
+  comment: Clock configuration register (RCC_CFGR)
+  bits:
+  - !bitset {name: SW,       mask: [1, 0],   comment: PLL clock ready flag }
+  - !bitset {name: SWS,      mask: [3, 2],   comment: System clock switch status }
+  - !bitset {name: HPRE,     mask: [7, 4],   comment: HCLK prescaler }
+  - !bitset {name: PPRE,     mask: [10, 8],  comment: PCLK prescaler }
+  - !bitset {name: ADCPRE,   mask: [14],     comment: ADC prescaler }
+  - !bitset {name: PLLSRC,   mask: [16, 15], comment: PLL input clock source }
+  - !bitset {name: PLLXTPRE, mask: [17],     comment: HSE divider for PLL input clock }
+  - !bitset {name: PLLMUL,   mask: [21, 18], comment: PLL multiplication factor }
+  - !bitset {name: MCO,      mask: [27, 24], comment: Microcontroller clock output }
+  - !bitset {name: MCOPRE,   mask: [30, 28], comment: Microcontroller Clock Output Prescaler (not available on STM32F05x devices) }
+  - !bitset {name: PLLNODIV, mask: [31],     comment: PLL clock not divided for MCO (not available on STM32F05x devices) }
+
+- !register
+  name: RCC_CFGR2
+  comment: Clock configuration register 2 (RCC_CFGR2)
+  bits:
+  - !bitset {name: PREDIV, mask: [3, 0], comment: PREDIV division factor }
+
