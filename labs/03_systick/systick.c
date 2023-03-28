@@ -62,18 +62,14 @@ void board_clocking_init()
     *REG_RCC_CFGR |= 0b10U;
     while ((*REG_RCC_CFGR & 0xCU) != 0x8U);
 
-    // (8) Set APB frequency to 24 MHz
-    *REG_RCC_CFGR |= 0b001U << 8U;
+    // (8) Set APB frequency to 48 MHz
+    *REG_RCC_CFGR |= 0b000U << 8U;
 }
 
-#define ONE_MS_DELAY_TIME 6000000U
+#define ONE_SEC_DELAY_TIME 3692308U // 48000000 / 13
 void more_precise_delay_forbidden_by_quantum_mechanics_1000ms()
 {
-    for (uint32_t i = 0; i < ONE_MS_DELAY_TIME; ++i)
-    {
-        // Insert NOP for power consumption:
-        __asm__ volatile("nop");
-    }
+    for (uint32_t i = 0; i < ONE_SEC_DELAY_TIME; ++i);
 }
 
 //--------------------
@@ -101,10 +97,10 @@ void board_gpio_init()
 void systick_init(uint32_t period_us)
 {
     // (0) Read STM32F051 SysTick configuration:
-    uint32_t reload_value = period_us * (*SYSTICK_CALIB & 0x00FFFFFFU) / 1000U;
-
-    // Ignore the SKEW in SYSTICK_CALIB register :(
-    // What if there is no reference clock on the board?
+    // Assumptions:
+    // - There is a reference clock and it can be chosen as clock source.
+    // - The SYST_CALIB SKEW bit is 1.
+    uint32_t reload_value = period_us * (CPU_FREQENCY / 1000000U) / 8;
 
     // (1) Program the reload value:
     *SYSTICK_RVR = (reload_value - 1U) & 0x00FFFFFFU;
@@ -113,6 +109,7 @@ void systick_init(uint32_t period_us)
     *SYSTICK_CVR = 0U;
 
     // (3) Program the CSR:
+    // Watch out for the clock source!
     *SYSTICK_CSR = 0x3U;
 }
 
@@ -139,9 +136,9 @@ int main(void)
 {
     board_clocking_init();
 
-    systick_init(100U);
-
     board_gpio_init();
+
+    systick_init(100U);
 
     while (1)
     {
