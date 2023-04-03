@@ -72,6 +72,41 @@ void more_precise_delay_forbidden_by_quantum_mechanics_1000ms()
     for (uint32_t i = 0; i < ONE_SEC_DELAY_TIME; ++i);
 }
 
+ __attribute__ ((noinline))
+void __delay( uint32_t ticks)
+{
+    __asm__ volatile
+    (
+        ".syntax unified\n\t"
+        ".sleep:\n\t"
+        "subs %0, #1;\n\t"  // 1 cycle
+        "isb\n\t"           // 4 cycles
+        "bne .sleep;\n\t"   // 3 cycles
+        ".syntax divided"
+    : "+r" ( ticks)
+    : // no pure input
+    : // no clobbers
+    );
+}
+
+inline void _inline_delay( uint32_t ticks)
+{
+    __asm__ volatile
+    (
+        ".syntax unified\n\t"
+        ".sleep%=:\n\t"
+        "subs %0, #1;\n\t"  // 1 cycle
+        "isb\n\t"           // 4 cycles
+        "bne .sleep%=;\n\t" // 3 cycles
+        ".syntax divided"
+    : "+r" ( ticks)
+    : // no pure input
+    : // no clobbers
+    );
+}
+
+#define delay_ms( msecs) _inline_delay( (msecs * ONE_MILLISECOND) / (1 + 4 + 3));
+
 //--------------------
 // GPIO configuration
 //--------------------
@@ -142,12 +177,14 @@ int main(void)
 
     while (1)
     {
-        more_precise_delay_forbidden_by_quantum_mechanics_1000ms();
-
+        //more_precise_delay_forbidden_by_quantum_mechanics_1000ms();
+        delay_ms( 500);
         *GPIOC_ODR |= 0x0200U;
 
-        more_precise_delay_forbidden_by_quantum_mechanics_1000ms();
+        //more_precise_delay_forbidden_by_quantum_mechanics_1000ms();
+        delay_ms( 500);
 
         *GPIOC_ODR &= ~0x0200U;
+
     }
 }
