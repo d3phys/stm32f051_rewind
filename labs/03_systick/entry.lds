@@ -22,7 +22,7 @@ SECTIONS
         KEEP(*(.vector_table));
         *(.text)
         *(.rodata)
-    } > FLASH
+    } >FLASH
 
     .data :
     {
@@ -36,6 +36,17 @@ SECTIONS
     } >SRAM AT >FLASH
 
     __data_start_lma = LOADADDR(.data);
+
+    .bss :
+    {
+        . = ALIGN(4);
+        __bss_start_vma = .;
+
+        *(.bss)
+
+        . = ALIGN(4);
+        __bss_end_vma = .;
+    } >SRAM
 
     __stack_start = SRAM_VADDR + SRAM_SIZE;
 

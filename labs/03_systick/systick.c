@@ -1,95 +1,120 @@
 #include <stdint.h>
 #include <stdbool.h>
-
-//---------------
-// RCC Registers
-//---------------
-
-#define REG_RCC_CR     (volatile uint32_t*)(uintptr_t)0x40021000U // Clock Control Register
-#define REG_RCC_CFGR   (volatile uint32_t*)(uintptr_t)0x40021004U // PLL Configuration Register
-#define REG_RCC_AHBENR (volatile uint32_t*)(uintptr_t)0x40021014U // AHB1 Peripheral Clock Enable Register
-#define REG_RCC_CFGR2  (volatile uint32_t*)(uintptr_t)0x4002102CU // Clock configuration register 2
-
-//----------------
-// GPIO Registers
-//----------------
-
-#define GPIOC_MODER (volatile uint32_t*)(uintptr_t)0x48000800U // GPIO port mode register
-#define GPIOC_TYPER (volatile uint32_t*)(uintptr_t)0x48000804U // GPIO port output type register
-#define GPIOC_ODR   (volatile uint32_t*)(uintptr_t)0x48000814U // GPIO port output data register
-
-//-------------------
-// SysTick registers
-//-------------------
-
-#define SYSTICK_CSR   (volatile uint32_t*)(uintptr_t)0xE000E010U // SysTick Control and Status Register
-#define SYSTICK_RVR   (volatile uint32_t*)(uintptr_t)0xE000E014U // SysTick Reload Value Register
-#define SYSTICK_CVR   (volatile uint32_t*)(uintptr_t)0xE000E018U // SysTick Current Value Register
-#define SYSTICK_CALIB (volatile uint32_t*)(uintptr_t)0xE000E01CU // SysTick Calibration Value Register
-
-//-------------------
-// RCC configuration
-//-------------------
-
-#define CPU_FREQENCY 48000000U // CPU frequency: 48 MHz
-#define ONE_MILLISECOND 48000U
+#include <stddef.h>
+#include "../../lib/stm32_memory.h"
+#include "../../lib/stm32_bits.h"
+#include "../../lib/bitwise.h"
 
 void board_clocking_init()
 {
+#define cpu_relax() __asm__ volatile( "nop")
     // (1) Clock HSE and wait for oscillations to setup.
-    *REG_RCC_CR = 0x00010000U;
-    while ((*REG_RCC_CR & 0x00020000U) != 0x00020000U);
+    set_bits( REG_RCC_CR, RCC_CR_HSEON);
+    while ( !test_bits( REG_RCC_CR, RCC_CR_HSERDY) )
+    {
+        cpu_relax();
+    }
 
     // (2) Configure PLL:
     // PREDIV output: HSE/2 = 4 MHz
-    *REG_RCC_CFGR2 |= 1U;
+    mask_bits( REG_RCC_CFGR2, RCC_CFGR2_PREDIV, RCC_CFGR2_PREDIV_0);
 
     // (3) Select PREDIV output as PLL input (4 MHz):
-    *REG_RCC_CFGR |= 0x00010000U;
+    mask_bits( REG_RCC_CFGR, RCC_CFGR_PLLSRC, RCC_CFGR_PLLSRC_1);
 
     // (4) Set PLLMUL to 12:
     // SYSCLK frequency = 48 MHz
-    *REG_RCC_CFGR |= (12U-2U) << 18U;
+    uint32_t SYSCLK_48MHz = RCC_CFGR_PLLMUL_3 | RCC_CFGR_PLLMUL_1;
+    mask_bits( REG_RCC_CFGR, RCC_CFGR_PLLMUL, SYSCLK_48MHz);
 
     // (5) Enable PLL:
-    *REG_RCC_CR |= 0x01000000U;
-    while ((*REG_RCC_CR & 0x02000000U) != 0x02000000U);
+    set_bits( REG_RCC_CR, RCC_CR_PLLON);
+    while ( !test_bits( REG_RCC_CR, RCC_CR_PLLRDY) )
+    {
+        cpu_relax();
+    }
 
     // (6) Configure AHB frequency to 48 MHz:
-    *REG_RCC_CFGR |= 0b000U << 4U;
+    mask_bits( REG_RCC_CFGR, RCC_CFGR_HPRE, 0U);
 
     // (7) Select PLL as SYSCLK source:
-    *REG_RCC_CFGR |= 0b10U;
-    while ((*REG_RCC_CFGR & 0xCU) != 0x8U);
+    mask_bits( REG_RCC_CFGR, RCC_CFGR_SW, RCC_CFGR_SW_1);
+    uint32_t is_PLL_SYSCLK = RCC_CFGR_SWS_1;
+    while ( !compare_bits( REG_RCC_CFGR, RCC_CFGR_SWS, is_PLL_SYSCLK) )
+    {
+        cpu_relax();
+    }
 
-    // (8) Set APB frequency to 48 MHz
-    *REG_RCC_CFGR |= 0b000U << 8U;
+    // (8) Set APB frequency to 24 MHz
+    mask_bits( REG_RCC_CFGR, RCC_CFGR_PPRE, RCC_CFGR_PPRE_2);
+#undef cpu_relax
 }
 
-#define ONE_SEC_DELAY_TIME 3692308U // 48000000 / 13
-void more_precise_delay_forbidden_by_quantum_mechanics_1000ms()
+//--------------------
+// GPIO configuration
+//--------------------
+//
+
+void board_gpio_init()
 {
-    for (uint32_t i = 0; i < ONE_SEC_DELAY_TIME; ++i);
+    // (1) Configure PA1-PA12 as output:
+    // I/O port A and C clocks enabled
+    set_bits( REG_RCC_AHBENR, RCC_AHBENR_IOPAEN);
+    set_bits( REG_RCC_AHBENR, RCC_AHBENR_IOPCEN);
+
+    // (2) Configure PC8 and PC9 to output modes:
+    uint32_t led_ports = GPIO_MODER_MODER8 | GPIO_MODER_MODER9;
+    uint32_t led_mask  = GPIO_MODER_MODER8_0 | GPIO_MODER_MODER9_0;
+    mask_bits( GPIOC_MODER, led_ports, led_mask);
+
+    // (3) Configure PC8 and PC9 output types:
+    clear_bits( GPIOC_TYPER, GPIO_OTYPER_OT8 | GPIO_OTYPER_OT9);
+    clear_bits( GPIOC_TYPER, GPIO_OTYPER_OT0 | GPIO_OTYPER_OT1);
 }
 
- __attribute__ ((noinline))
-void __delay( uint32_t ticks)
+//-----------------------
+// SysTick configuration
+//-----------------------
+
+#define CPU_FREQENCY 48000000U // CPU frequency: 48 MHz
+
+void systick_init(uint32_t period_us)
 {
-    __asm__ volatile
-    (
-        ".syntax unified\n\t"
-        ".sleep:\n\t"
-        "subs %0, #1;\n\t"  // 1 cycle
-        "isb\n\t"           // 4 cycles
-        "bne .sleep;\n\t"   // 3 cycles
-        ".syntax divided"
-    : "+r" ( ticks)
-    : // no pure input
-    : // no clobbers
-    );
+    // (0) Read STM32F051 SysTick configuration:
+    // Assumptions:
+    // - There is a reference clock and it can be chosen as clock source.
+    // - The SYST_CALIB SKEW bit is 1.
+    uint32_t reload_value = (period_us * (CPU_FREQENCY / 1000000U)) / 8;
+
+    // (1) Program the reload value:
+    mask_bits( SYSTICK_RVR, SYST_RVR_RELOAD, reload_value - 1U);
+
+    // (2) Clear the current value:
+    clear_bits( SYSTICK_CVR, SYST_CVR_CURRENT);
+
+    // (3) Program the CSR:
+    // Watch out for the clock source!
+    set_bits( SYSTICK_CSR, SYST_CSR_ENABLE | SYST_CSR_TICKINT);
 }
 
-inline void _inline_delay( uint32_t ticks)
+void systick_handler(void)
+{
+    static int handler_ticks = 0U;
+
+    handler_ticks += 1U;
+    if ( handler_ticks == 100U )
+    {
+        handler_ticks = 0U;
+        uint32_t reg_gpio_odr = *GPIOC_ODR;
+        *GPIOC_ODR = ( reg_gpio_odr & ~GPIO_ODR_ODR8) |
+                     (~reg_gpio_odr &  GPIO_ODR_ODR8);
+    }
+}
+
+#if defined(INLINE_DELAY)
+
+static void inline
+precise_delay( uint32_t ticks)
 {
     __asm__ volatile
     (
@@ -105,86 +130,45 @@ inline void _inline_delay( uint32_t ticks)
     );
 }
 
-#define delay_ms( msecs) _inline_delay( (msecs * ONE_MILLISECOND) / (1 + 4 + 3));
+#else /* !defined(INLINE_DELAY) */
 
-//--------------------
-// GPIO configuration
-//--------------------
-
-void board_gpio_init()
+static void __attribute__ ((noinline))
+precise_delay( uint32_t ticks)
 {
-    // (1) Configure PC8 and PC9:
-    *REG_RCC_AHBENR |= (1U << 19U);
-
-    // (2) Configure LED modes:
-    *GPIOC_MODER |= (0b01U << (2U*8U));
-    *GPIOC_MODER |= (0b01U << (2U*9U));
-
-    // (3) Configure LED types:
-    *GPIOC_TYPER |= (0U << 8U);
-    *GPIOC_TYPER |= (0U << 9U);
+    __asm__ volatile
+    (
+        ".syntax unified\n\t"
+        ".sleep:\n\t"
+        "subs %0, #1;\n\t"  // 1 cycle
+        "isb\n\t"           // 4 cycles
+        "bne .sleep;\n\t"   // 3 cycles
+        ".syntax divided"
+    : "+r" ( ticks)
+    : // no pure input
+    : // no clobbers
+    );
 }
 
-//-----------------------
-// SysTick configuration
-//-----------------------
+#endif /* !defined(INLINE_DELAY) */
 
-void systick_init(uint32_t period_us)
-{
-    // (0) Read STM32F051 SysTick configuration:
-    // Assumptions:
-    // - There is a reference clock and it can be chosen as clock source.
-    // - The SYST_CALIB SKEW bit is 1.
-    uint32_t reload_value = period_us * (CPU_FREQENCY / 1000000U) / 8;
+#define ONE_MILLISECOND (CPU_FREQENCY/1000U)
+#define delay_ms( msecs) precise_delay( ((msecs) * ONE_MILLISECOND) / (1 + 4 + 3));
 
-    // (1) Program the reload value:
-    *SYSTICK_RVR = (reload_value - 1U) & 0x00FFFFFFU;
-
-    // (2) Clear the current value:
-    *SYSTICK_CVR = 0U;
-
-    // (3) Program the CSR:
-    // Watch out for the clock source!
-    *SYSTICK_CSR = 0x3U;
-}
-
-void systick_handler(void)
-{
-    static int handler_ticks = 1U;
-
-    handler_ticks += 1U;
-
-    if (handler_ticks == 10000U)
-    {
-        handler_ticks = 0U;
-
-        uint32_t reg_gpio_odr = *GPIOC_ODR;
-        *GPIOC_ODR = (reg_gpio_odr & ~0x0100U) | (~reg_gpio_odr & 0x0100U);
-    }
-}
-
-//------
-// Main
-//------
-
-int main(void)
+int main( void)
 {
     board_clocking_init();
-
     board_gpio_init();
 
-    systick_init(100U);
+    systick_init( 10000U);
 
-    while (1)
+    for ( ;; )
     {
         //more_precise_delay_forbidden_by_quantum_mechanics_1000ms();
-        delay_ms( 500);
-        *GPIOC_ODR |= 0x0200U;
+        delay_ms( 1000);
+        set_bits( GPIOC_BSRR, GPIO_BSRR_BS9);
 
         //more_precise_delay_forbidden_by_quantum_mechanics_1000ms();
-        delay_ms( 500);
-
-        *GPIOC_ODR &= ~0x0200U;
-
+        delay_ms( 1000);
+        set_bits( GPIOC_BSRR, GPIO_BSRR_BR9);
     }
 }

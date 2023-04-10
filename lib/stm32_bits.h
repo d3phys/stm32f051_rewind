@@ -210,6 +210,41 @@
 #define GPIO_ODR_ODR15                   ((uint32_t)0x00008000)
 
 
+/*     GPIO port bit set/reset register (GPIOx_BSRR) (x = A..F)     */
+#define GPIO_BSRR_BS0                    ((uint32_t)0x00000001)
+#define GPIO_BSRR_BS1                    ((uint32_t)0x00000002)
+#define GPIO_BSRR_BS2                    ((uint32_t)0x00000004)
+#define GPIO_BSRR_BS3                    ((uint32_t)0x00000008)
+#define GPIO_BSRR_BS4                    ((uint32_t)0x00000010)
+#define GPIO_BSRR_BS5                    ((uint32_t)0x00000020)
+#define GPIO_BSRR_BS6                    ((uint32_t)0x00000040)
+#define GPIO_BSRR_BS7                    ((uint32_t)0x00000080)
+#define GPIO_BSRR_BS8                    ((uint32_t)0x00000100)
+#define GPIO_BSRR_BS9                    ((uint32_t)0x00000200)
+#define GPIO_BSRR_BS10                   ((uint32_t)0x00000400)
+#define GPIO_BSRR_BS11                   ((uint32_t)0x00000800)
+#define GPIO_BSRR_BS12                   ((uint32_t)0x00001000)
+#define GPIO_BSRR_BS13                   ((uint32_t)0x00002000)
+#define GPIO_BSRR_BS14                   ((uint32_t)0x00004000)
+#define GPIO_BSRR_BS15                   ((uint32_t)0x00008000)
+#define GPIO_BSRR_BR0                    ((uint32_t)0x00010000)
+#define GPIO_BSRR_BR1                    ((uint32_t)0x00020000)
+#define GPIO_BSRR_BR2                    ((uint32_t)0x00040000)
+#define GPIO_BSRR_BR3                    ((uint32_t)0x00080000)
+#define GPIO_BSRR_BR4                    ((uint32_t)0x00100000)
+#define GPIO_BSRR_BR5                    ((uint32_t)0x00200000)
+#define GPIO_BSRR_BR6                    ((uint32_t)0x00400000)
+#define GPIO_BSRR_BR7                    ((uint32_t)0x00800000)
+#define GPIO_BSRR_BR8                    ((uint32_t)0x01000000)
+#define GPIO_BSRR_BR9                    ((uint32_t)0x02000000)
+#define GPIO_BSRR_BR10                   ((uint32_t)0x04000000)
+#define GPIO_BSRR_BR11                   ((uint32_t)0x08000000)
+#define GPIO_BSRR_BR12                   ((uint32_t)0x10000000)
+#define GPIO_BSRR_BR13                   ((uint32_t)0x20000000)
+#define GPIO_BSRR_BR14                   ((uint32_t)0x40000000)
+#define GPIO_BSRR_BR15                   ((uint32_t)0x80000000)
+
+
 /*        AHB peripheral clock enable register (RCC_AHBENR)         */
 #define RCC_AHBENR_DMAEN                 ((uint32_t)0x00000001) /* DMA clock enable */
 #define RCC_AHBENR_DMA2EN                ((uint32_t)0x00000002) /* DMA2 clock enable */
@@ -295,3 +330,96 @@
 #define RCC_CFGR2_PREDIV_1               ((uint32_t)0x00000002) /* PREDIV bit 1 */
 #define RCC_CFGR2_PREDIV_2               ((uint32_t)0x00000004) /* PREDIV bit 2 */
 #define RCC_CFGR2_PREDIV_3               ((uint32_t)0x00000008) /* PREDIV bit 3 */
+
+
+/*               SysTick Control and Status Register                */
+#define SYST_CSR_ENABLE                  ((uint32_t)0x00000001) /* Enables the counter */
+#define SYST_CSR_TICKINT                 ((uint32_t)0x00000002) /* Enables SysTick exception request */
+#define SYST_CSR_CLKSOURCE               ((uint32_t)0x00000004) /* Selects the SysTick timer clock source */
+#define SYST_CSR_COUNTFLAG               ((uint32_t)0x00010000) /* Returns 1 if timer counted to 0 since the last read of this register */
+
+
+/*                  SysTick Reload Value Register                   */
+#define SYST_RVR_RELOAD                  ((uint32_t)0x00FFFFFF) /* Value to load into the SYST_CVR when the counter is enabled and when it reaches 0 */
+#define SYST_RVR_RELOAD_0                ((uint32_t)0x00000001) /* RELOAD bit 0 */
+#define SYST_RVR_RELOAD_1                ((uint32_t)0x00000002) /* RELOAD bit 1 */
+#define SYST_RVR_RELOAD_2                ((uint32_t)0x00000004) /* RELOAD bit 2 */
+#define SYST_RVR_RELOAD_3                ((uint32_t)0x00000008) /* RELOAD bit 3 */
+#define SYST_RVR_RELOAD_4                ((uint32_t)0x00000010) /* RELOAD bit 4 */
+#define SYST_RVR_RELOAD_5                ((uint32_t)0x00000020) /* RELOAD bit 5 */
+#define SYST_RVR_RELOAD_6                ((uint32_t)0x00000040) /* RELOAD bit 6 */
+#define SYST_RVR_RELOAD_7                ((uint32_t)0x00000080) /* RELOAD bit 7 */
+#define SYST_RVR_RELOAD_8                ((uint32_t)0x00000100) /* RELOAD bit 8 */
+#define SYST_RVR_RELOAD_9                ((uint32_t)0x00000200) /* RELOAD bit 9 */
+#define SYST_RVR_RELOAD_10               ((uint32_t)0x00000400) /* RELOAD bit 10 */
+#define SYST_RVR_RELOAD_11               ((uint32_t)0x00000800) /* RELOAD bit 11 */
+#define SYST_RVR_RELOAD_12               ((uint32_t)0x00001000) /* RELOAD bit 12 */
+#define SYST_RVR_RELOAD_13               ((uint32_t)0x00002000) /* RELOAD bit 13 */
+#define SYST_RVR_RELOAD_14               ((uint32_t)0x00004000) /* RELOAD bit 14 */
+#define SYST_RVR_RELOAD_15               ((uint32_t)0x00008000) /* RELOAD bit 15 */
+#define SYST_RVR_RELOAD_16               ((uint32_t)0x00010000) /* RELOAD bit 16 */
+#define SYST_RVR_RELOAD_17               ((uint32_t)0x00020000) /* RELOAD bit 17 */
+#define SYST_RVR_RELOAD_18               ((uint32_t)0x00040000) /* RELOAD bit 18 */
+#define SYST_RVR_RELOAD_19               ((uint32_t)0x00080000) /* RELOAD bit 19 */
+#define SYST_RVR_RELOAD_20               ((uint32_t)0x00100000) /* RELOAD bit 20 */
+#define SYST_RVR_RELOAD_21               ((uint32_t)0x00200000) /* RELOAD bit 21 */
+#define SYST_RVR_RELOAD_22               ((uint32_t)0x00400000) /* RELOAD bit 22 */
+#define SYST_RVR_RELOAD_23               ((uint32_t)0x00800000) /* RELOAD bit 23 */
+
+
+/*                  SysTick Current Value Register                  */
+#define SYST_CVR_CURRENT                 ((uint32_t)0x00FFFFFF) /* The current value of the SysTick counter */
+#define SYST_CVR_CURRENT_0               ((uint32_t)0x00000001) /* CURRENT bit 0 */
+#define SYST_CVR_CURRENT_1               ((uint32_t)0x00000002) /* CURRENT bit 1 */
+#define SYST_CVR_CURRENT_2               ((uint32_t)0x00000004) /* CURRENT bit 2 */
+#define SYST_CVR_CURRENT_3               ((uint32_t)0x00000008) /* CURRENT bit 3 */
+#define SYST_CVR_CURRENT_4               ((uint32_t)0x00000010) /* CURRENT bit 4 */
+#define SYST_CVR_CURRENT_5               ((uint32_t)0x00000020) /* CURRENT bit 5 */
+#define SYST_CVR_CURRENT_6               ((uint32_t)0x00000040) /* CURRENT bit 6 */
+#define SYST_CVR_CURRENT_7               ((uint32_t)0x00000080) /* CURRENT bit 7 */
+#define SYST_CVR_CURRENT_8               ((uint32_t)0x00000100) /* CURRENT bit 8 */
+#define SYST_CVR_CURRENT_9               ((uint32_t)0x00000200) /* CURRENT bit 9 */
+#define SYST_CVR_CURRENT_10              ((uint32_t)0x00000400) /* CURRENT bit 10 */
+#define SYST_CVR_CURRENT_11              ((uint32_t)0x00000800) /* CURRENT bit 11 */
+#define SYST_CVR_CURRENT_12              ((uint32_t)0x00001000) /* CURRENT bit 12 */
+#define SYST_CVR_CURRENT_13              ((uint32_t)0x00002000) /* CURRENT bit 13 */
+#define SYST_CVR_CURRENT_14              ((uint32_t)0x00004000) /* CURRENT bit 14 */
+#define SYST_CVR_CURRENT_15              ((uint32_t)0x00008000) /* CURRENT bit 15 */
+#define SYST_CVR_CURRENT_16              ((uint32_t)0x00010000) /* CURRENT bit 16 */
+#define SYST_CVR_CURRENT_17              ((uint32_t)0x00020000) /* CURRENT bit 17 */
+#define SYST_CVR_CURRENT_18              ((uint32_t)0x00040000) /* CURRENT bit 18 */
+#define SYST_CVR_CURRENT_19              ((uint32_t)0x00080000) /* CURRENT bit 19 */
+#define SYST_CVR_CURRENT_20              ((uint32_t)0x00100000) /* CURRENT bit 20 */
+#define SYST_CVR_CURRENT_21              ((uint32_t)0x00200000) /* CURRENT bit 21 */
+#define SYST_CVR_CURRENT_22              ((uint32_t)0x00400000) /* CURRENT bit 22 */
+#define SYST_CVR_CURRENT_23              ((uint32_t)0x00800000) /* CURRENT bit 23 */
+
+
+/*                SysTick Calibration Value Register                */
+#define SYST_CALIB_TENMS                 ((uint32_t)0x00FFFFFF) /* Reload value for 10ms (100Hz) timing */
+#define SYST_CALIB_TENMS_0               ((uint32_t)0x00000001) /* TENMS bit 0 */
+#define SYST_CALIB_TENMS_1               ((uint32_t)0x00000002) /* TENMS bit 1 */
+#define SYST_CALIB_TENMS_2               ((uint32_t)0x00000004) /* TENMS bit 2 */
+#define SYST_CALIB_TENMS_3               ((uint32_t)0x00000008) /* TENMS bit 3 */
+#define SYST_CALIB_TENMS_4               ((uint32_t)0x00000010) /* TENMS bit 4 */
+#define SYST_CALIB_TENMS_5               ((uint32_t)0x00000020) /* TENMS bit 5 */
+#define SYST_CALIB_TENMS_6               ((uint32_t)0x00000040) /* TENMS bit 6 */
+#define SYST_CALIB_TENMS_7               ((uint32_t)0x00000080) /* TENMS bit 7 */
+#define SYST_CALIB_TENMS_8               ((uint32_t)0x00000100) /* TENMS bit 8 */
+#define SYST_CALIB_TENMS_9               ((uint32_t)0x00000200) /* TENMS bit 9 */
+#define SYST_CALIB_TENMS_10              ((uint32_t)0x00000400) /* TENMS bit 10 */
+#define SYST_CALIB_TENMS_11              ((uint32_t)0x00000800) /* TENMS bit 11 */
+#define SYST_CALIB_TENMS_12              ((uint32_t)0x00001000) /* TENMS bit 12 */
+#define SYST_CALIB_TENMS_13              ((uint32_t)0x00002000) /* TENMS bit 13 */
+#define SYST_CALIB_TENMS_14              ((uint32_t)0x00004000) /* TENMS bit 14 */
+#define SYST_CALIB_TENMS_15              ((uint32_t)0x00008000) /* TENMS bit 15 */
+#define SYST_CALIB_TENMS_16              ((uint32_t)0x00010000) /* TENMS bit 16 */
+#define SYST_CALIB_TENMS_17              ((uint32_t)0x00020000) /* TENMS bit 17 */
+#define SYST_CALIB_TENMS_18              ((uint32_t)0x00040000) /* TENMS bit 18 */
+#define SYST_CALIB_TENMS_19              ((uint32_t)0x00080000) /* TENMS bit 19 */
+#define SYST_CALIB_TENMS_20              ((uint32_t)0x00100000) /* TENMS bit 20 */
+#define SYST_CALIB_TENMS_21              ((uint32_t)0x00200000) /* TENMS bit 21 */
+#define SYST_CALIB_TENMS_22              ((uint32_t)0x00400000) /* TENMS bit 22 */
+#define SYST_CALIB_TENMS_23              ((uint32_t)0x00800000) /* TENMS bit 23 */
+#define SYST_CALIB_SKEW                  ((uint32_t)0x40000000) /* Indicates whether the TENMS value is exact */
+#define SYST_CALIB_NOREF                 ((uint32_t)0x80000000) /* Indicates whether the device provides a reference clock to the processor */

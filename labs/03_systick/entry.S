@@ -1,5 +1,6 @@
 .syntax unified
 
+.align 4
 .section .text
 
 .thumb_func
@@ -22,6 +23,20 @@ __loop_copy_data_section:
 	b __loop_copy_data_section
 __loop_copy_data_section_end:
 
+	movs r0, 0
+	ldr r1, __bss_start_vma_val
+	ldr r2, __bss_end_vma_val
+
+__loop_copy_bss_section:
+	cmp r1, r2
+	beq __loop_copy_bss_section_end
+
+	str r0, [r1, #0]
+
+	adds r1, r1, #4
+	b __loop_copy_bss_section
+__loop_copy_bss_section_end:
+
 	// Execute actual software:
     blx main
 
@@ -29,6 +44,11 @@ __halt:
 	b __halt
 __exc_handler:
 	b __exc_handler
+
+__bss_start_vma_val:
+.word __bss_start_vma
+__bss_end_vma_val:
+.word __bss_end_vma
 
 __data_start_lma_val:
 .word __data_start_lma

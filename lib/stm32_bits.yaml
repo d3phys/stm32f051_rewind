@@ -128,6 +128,43 @@
     - !bitset {name: ODR15, mask: [15] }
 
 - !register
+  name: GPIO_BSRR
+  comment: GPIO port bit set/reset register (GPIOx_BSRR) (x = A..F)
+  bits:
+    - !bitset {name: BS0,  mask: [0] }
+    - !bitset {name: BS1,  mask: [1] }
+    - !bitset {name: BS2,  mask: [2] }
+    - !bitset {name: BS3,  mask: [3] }
+    - !bitset {name: BS4,  mask: [4] }
+    - !bitset {name: BS5,  mask: [5] }
+    - !bitset {name: BS6,  mask: [6] }
+    - !bitset {name: BS7,  mask: [7] }
+    - !bitset {name: BS8,  mask: [8] }
+    - !bitset {name: BS9,  mask: [9] }
+    - !bitset {name: BS10, mask: [10] }
+    - !bitset {name: BS11, mask: [11] }
+    - !bitset {name: BS12, mask: [12] }
+    - !bitset {name: BS13, mask: [13] }
+    - !bitset {name: BS14, mask: [14] }
+    - !bitset {name: BS15, mask: [15] }
+    - !bitset {name: BR0,  mask: [16] }
+    - !bitset {name: BR1,  mask: [17] }
+    - !bitset {name: BR2,  mask: [18] }
+    - !bitset {name: BR3,  mask: [19] }
+    - !bitset {name: BR4,  mask: [20] }
+    - !bitset {name: BR5,  mask: [21] }
+    - !bitset {name: BR6,  mask: [22] }
+    - !bitset {name: BR7,  mask: [23] }
+    - !bitset {name: BR8,  mask: [24] }
+    - !bitset {name: BR9,  mask: [25] }
+    - !bitset {name: BR10, mask: [26] }
+    - !bitset {name: BR11, mask: [27] }
+    - !bitset {name: BR12, mask: [28] }
+    - !bitset {name: BR13, mask: [29] }
+    - !bitset {name: BR14, mask: [30] }
+    - !bitset {name: BR15, mask: [31] }
+
+- !register
   name: RCC_AHBENR
   comment: AHB peripheral clock enable register (RCC_AHBENR)
   bits:
@@ -180,4 +217,34 @@
   comment: Clock configuration register 2 (RCC_CFGR2)
   bits:
   - !bitset {name: PREDIV, mask: [3, 0], comment: PREDIV division factor }
+
+- !register
+  name: SYST_CSR
+  comment: SysTick Control and Status Register
+  bits:
+  - !bitset {name: ENABLE,    mask: [0],  comment: Enables the counter }
+  - !bitset {name: TICKINT,   mask: [1],  comment: Enables SysTick exception request }
+  - !bitset {name: CLKSOURCE, mask: [2],  comment: Selects the SysTick timer clock source }
+  - !bitset {name: COUNTFLAG, mask: [16], comment: Returns 1 if timer counted to 0 since the last read of this register }
+
+- !register
+  name: SYST_RVR
+  comment: SysTick Reload Value Register
+  bits:
+  - !bitset {name: RELOAD, mask: [23, 0],  comment: Value to load into the SYST_CVR when the counter is enabled and when it reaches 0 }
+
+- !register
+  name: SYST_CVR
+  comment: SysTick Current Value Register
+  bits:
+  - !bitset {name: CURRENT, mask: [23, 0],  comment: The current value of the SysTick counter }
+
+- !register
+  name: SYST_CALIB
+  comment: SysTick Calibration Value Register
+  bits:
+  - !bitset {name: TENMS, mask: [23, 0], comment: Reload value for 10ms (100Hz) timing }
+  - !bitset {name: SKEW,  mask: [30],    comment: Indicates whether the TENMS value is exact }
+  - !bitset {name: NOREF, mask: [31],    comment: Indicates whether the device provides a reference clock to the processor }
+
 
