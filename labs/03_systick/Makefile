@@ -33,8 +33,7 @@ endif
 #-------
 
 SOURCES = \
-	entry.S \
-	systick.c
+	entry.S
 
 OBJECTS_HALFWAY_DONE = $(SOURCES:%.c=build/%.o)
 OBJECTS              = $(OBJECTS_HALFWAY_DONE:%.S=build/%.o)
@@ -44,16 +43,25 @@ ENTRY_FLASH = build/entry.o
 EXECUTABLE_FLASH = build/systick.elf
 BINARY_FLASH     = build/systick.bin
 
+PORT_EXECUTABLE_FLASH = build/gpio_port.elf
+PORT_BINARY_FLASH     = build/gpio_port.bin
+
 #---------------
 # Build scripts
 #---------------
 
-all: $(EXECUTABLE_FLASH) $(BINARY_FLASH) $(SOURCES)
+all: $(EXECUTABLE_FLASH) $(BINARY_FLASH) $(PORT_EXECUTABLE_FLASH) $(PORT_BINARY_FLASH) $(SOURCES)
 
-$(EXECUTABLE_FLASH): $(OBJECTS)
-	$(CC) $(LDFLAGS) $(OBJECTS) -o $@
+$(EXECUTABLE_FLASH): $(OBJECTS) build/systick.o
+	$(CC) $(LDFLAGS) $? -o $@
 
 $(BINARY_FLASH): $(EXECUTABLE_FLASH)
+	arm-none-eabi-objcopy -O binary $< $@
+
+$(PORT_EXECUTABLE_FLASH): $(OBJECTS) build/gpio_port.o
+	$(CC) $(LDFLAGS) $? -o $@
+
+$(PORT_BINARY_FLASH): $(PORT_EXECUTABLE_FLASH)
 	arm-none-eabi-objcopy -O binary $< $@
 
 build/%.o: %.c
@@ -70,6 +78,9 @@ clean:
 #----------------------
 # Hardware interaction
 #----------------------
+
+port: $(PORT_BINARY_FLASH)
+	st-flash write $(PORT_BINARY_FLASH) 0x08000000
 
 flash: $(BINARY_FLASH)
 	st-flash write $(BINARY_FLASH) 0x08000000
