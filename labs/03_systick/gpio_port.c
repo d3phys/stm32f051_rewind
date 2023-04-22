@@ -384,4 +384,9 @@ int main()
     board_gpio_init();
 
     systick_init( 1000U);
+
+    for ( ;; )
+    {
+        __asm__ volatile("wfi");
+    }
 }

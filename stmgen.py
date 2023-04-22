@@ -67,6 +67,7 @@ try:
     for reg in registers:
         reg.finalize_pass()
 
+    print('#pragma once')
     for reg in registers:
         print('\n')
         print(reg, end='')

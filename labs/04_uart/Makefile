@@ -79,6 +79,10 @@ GDB_FLAGS = \
 flash: FORCE $(BINARY_FLASH)
 	st-flash write $(BINARY_FLASH) 0x08000000
 
+reset: $(BINARY_FLASH)
+	st-flash --connect-under-reset --reset write $(BINARY_FLASH) 0x08000000
+#st-flash --connect-under-reset --reset write $(PORT_BINARY_FLASH) 0x08000000
+
 hardware: FORCE $(EXECUTABLE_FLASH)
 	st-util -p 1234
 
@@ -86,7 +90,9 @@ gdb: FORCE $(BINARY_FLASH)
 	arm-none-eabi-gdb $(GDB_FLAGS)
 
 uart: FORCE
-	sudo cp minirc.stm32f051 /etc/minicom/
-	sudo minicom -D /dev/ttyUSB0 stm32f051
+	sudo tio -m ICRNL,INLCRNL -b 9600 /dev/ttyUSB0
+#sudo cp minirc.stm32f051 /etc/minicom/
+#sudo minicom -D /dev/ttyUSB0 stm32f051
+
 
 FORCE:

@@ -80,7 +80,7 @@ clean:
 #----------------------
 
 port: $(PORT_BINARY_FLASH)
-	st-flash write $(PORT_BINARY_FLASH) 0x08000000
+	st-flash --connect-under-reset --reset write $(PORT_BINARY_FLASH) 0x08000000
 
 flash: $(BINARY_FLASH)
 	st-flash write $(BINARY_FLASH) 0x08000000

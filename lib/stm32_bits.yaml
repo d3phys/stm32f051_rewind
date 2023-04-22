@@ -182,6 +182,32 @@
   - !bitset {name: TSCEN,   mask: [2],  comment: Touch sensing controller clock enable }
 
 - !register
+  name: RCC_AFRL
+  comment: GPIO alternate function low register (GPIOx_AFRL) (x = A..F)
+  bits:
+  - !bitset {name: AFSEL0, mask: [3, 0] }
+  - !bitset {name: AFSEL1, mask: [7, 4] }
+  - !bitset {name: AFSEL2, mask: [11, 8] }
+  - !bitset {name: AFSEL3, mask: [15, 12] }
+  - !bitset {name: AFSEL4, mask: [19, 16] }
+  - !bitset {name: AFSEL5, mask: [23, 20] }
+  - !bitset {name: AFSEL6, mask: [27, 24] }
+  - !bitset {name: AFSEL7, mask: [31, 28] }
+
+- !register
+  name: RCC_AFRH
+  comment: GPIO alternate function high register (GPIOx_AFRH) (x = A..F)
+  bits:
+  - !bitset {name: AFSEL8,  mask: [3, 0] }
+  - !bitset {name: AFSEL9,  mask: [7, 4] }
+  - !bitset {name: AFSEL10, mask: [11, 8] }
+  - !bitset {name: AFSEL11, mask: [15, 12] }
+  - !bitset {name: AFSEL12, mask: [19, 16] }
+  - !bitset {name: AFSEL13, mask: [23, 20] }
+  - !bitset {name: AFSEL14, mask: [27, 24] }
+  - !bitset {name: AFSEL15, mask: [31, 28] }
+
+- !register
   name: RCC_CR
   comment: Clock control register (RCC_CR)
   bits:
@@ -219,6 +245,35 @@
   - !bitset {name: PREDIV, mask: [3, 0], comment: PREDIV division factor }
 
 - !register
+  name: RCC_CFGR3
+  comment: Clock configuration register 3 (RCC_CFGR)
+  bits:
+  - !bitset {name: USART3SW, mask: [19, 18], comment: USART3 clock source selection (available only on STM32F09x devices) }
+  - !bitset {name: USART2SW, mask: [17, 16], comment: USART2 clock source selection (available only on STM32F07x and STM32F09x devices) }
+  - !bitset {name: ADCSW,    mask: [8],      comment: ADC clock source selection }
+  - !bitset {name: USBSW,    mask: [7],      comment: USB clock source selection }
+  - !bitset {name: CECSW,    mask: [6],      comment: HDMI CEC clock source selection }
+  - !bitset {name: I2C1SW,   mask: [4],      comment: I2C1 clock source selection }
+  - !bitset {name: USART1SW, mask: [1, 0],   comment: USART1 clock source selection }
+
+- !register
+  name: RCC_APB2ENR
+  comment: APB peripheral clock enable register 2 (RCC_APB2ENR)
+  bits:
+  - !bitset {name: DBGMCUEN,     mask: [22], comment: MCU debug module clock enable }
+  - !bitset {name: TIM17EN,      mask: [18], comment: TIM17 timer clock enable }
+  - !bitset {name: TIM16EN,      mask: [17], comment: TIM16 timer clock enable }
+  - !bitset {name: TIM15EN,      mask: [16], comment: TIM15 timer clock enable }
+  - !bitset {name: USART1EN,     mask: [14], comment: USART1 clock enable }
+  - !bitset {name: SPI1EN,       mask: [12], comment: SPI1 clock enable }
+  - !bitset {name: TIM1EN,       mask: [11], comment: TIM1 timer clock enable }
+  - !bitset {name: ADCEN,        mask: [9],  comment: ADC interface clock enable }
+  - !bitset {name: USART8EN,     mask: [7],  comment: USART8 clock enable }
+  - !bitset {name: USART7EN,     mask: [6],  comment: USART7 clock enable }
+  - !bitset {name: USART6EN,     mask: [5],  comment: USART6 clock enable }
+  - !bitset {name: SYSCFGCOMPEN, mask: [0],  comment: SYSCFG & COMP clock enable }
+
+- !register
   name: SYST_CSR
   comment: SysTick Control and Status Register
   bits:
@@ -237,7 +292,7 @@
   name: SYST_CVR
   comment: SysTick Current Value Register
   bits:
-  - !bitset {name: CURRENT, mask: [23, 0],  comment: The current value of the SysTick counter }
+    - !bitset {name: CURRENT, mask: [23, 0], comment: The current value of the SysTick counter }
 
 - !register
   name: SYST_CALIB
@@ -247,4 +302,123 @@
   - !bitset {name: SKEW,  mask: [30],    comment: Indicates whether the TENMS value is exact }
   - !bitset {name: NOREF, mask: [31],    comment: Indicates whether the device provides a reference clock to the processor }
 
+- !register
+  name: USART_CR1
+  comment: SysTick Calibration Value Register
+  bits:
+  - !bitset {name: M1,     mask: [28],     comment: Word length }
+  - !bitset {name: EOBIE,  mask: [27],     comment: End of Block interrupt enable }
+  - !bitset {name: RTOIE,  mask: [26],     comment: Receiver timeout interrupt enable }
+  - !bitset {name: DEAT,   mask: [25, 21], comment: Driver Enable assertion time }
+  - !bitset {name: DEDT,   mask: [20, 16], comment: Driver Enable de-assertion time }
+  - !bitset {name: OVER8,  mask: [15],     comment: Oversampling mode }
+  - !bitset {name: CMIE,   mask: [14],     comment: Character match interrupt enable }
+  - !bitset {name: MME,    mask: [13],     comment: Mute mode enable }
+  - !bitset {name: M0,     mask: [12],     comment: Word length }
+  - !bitset {name: WAKE,   mask: [11],     comment: Receiver wakeup method }
+  - !bitset {name: PCE,    mask: [10],     comment: Parity control enable }
+  - !bitset {name: PS,     mask: [9],      comment: Parity selection }
+  - !bitset {name: PEIE,   mask: [8],      comment: PE interrupt enable }
+  - !bitset {name: TXEIE,  mask: [7],      comment: Interrupt enable }
+  - !bitset {name: TCIE,   mask: [6],      comment: Transmission complete interrupt enable }
+  - !bitset {name: RXNEIE, mask: [5],      comment: RXNE interrupt enable }
+  - !bitset {name: IDLEIE, mask: [4],      comment: IDLE interrupt enable }
+  - !bitset {name: TE,     mask: [3],      comment: Transmitter enable }
+  - !bitset {name: RE,     mask: [2],      comment: Receiver enable }
+  - !bitset {name: UESM,   mask: [1],      comment: USART enable in Stop mode }
+  - !bitset {name: UE,     mask: [0],      comment: USART enable }
 
+- !register
+  name: USART_CR1
+  comment: Control register 1 (USART_CR1)
+  bits:
+  - !bitset {name: M1,     mask: [28],     comment: Word length }
+  - !bitset {name: EOBIE,  mask: [27],     comment: End of Block interrupt enable }
+  - !bitset {name: RTOIE,  mask: [26],     comment: Receiver timeout interrupt enable }
+  - !bitset {name: DEAT,   mask: [25, 21], comment: Driver Enable assertion time }
+  - !bitset {name: DEDT,   mask: [20, 16], comment: Driver Enable de-assertion time }
+  - !bitset {name: OVER8,  mask: [15],     comment: Oversampling mode }
+  - !bitset {name: CMIE,   mask: [14],     comment: Character match interrupt enable }
+  - !bitset {name: MME,    mask: [13],     comment: Mute mode enable }
+  - !bitset {name: M0,     mask: [12],     comment: Word length }
+  - !bitset {name: WAKE,   mask: [11],     comment: Receiver wakeup method }
+  - !bitset {name: PCE,    mask: [10],     comment: Parity control enable }
+  - !bitset {name: PS,     mask: [9],      comment: Parity selection }
+  - !bitset {name: PEIE,   mask: [8],      comment: PE interrupt enable }
+  - !bitset {name: TXEIE,  mask: [7],      comment: Interrupt enable }
+  - !bitset {name: TCIE,   mask: [6],      comment: Transmission complete interrupt enable }
+  - !bitset {name: RXNEIE, mask: [5],      comment: RXNE interrupt enable }
+  - !bitset {name: IDLEIE, mask: [4],      comment: IDLE interrupt enable }
+  - !bitset {name: TE,     mask: [3],      comment: Transmitter enable }
+  - !bitset {name: RE,     mask: [2],      comment: Receiver enable }
+  - !bitset {name: UESM,   mask: [1],      comment: USART enable in Stop mode }
+  - !bitset {name: UE,     mask: [0],      comment: USART enable }
+
+- !register
+  name: USART_CR2
+  comment: Control register 2 (USART_CR2)
+  bits:
+  - !bitset {name: ADDh,     mask: [31, 28], comment: Address of the USART node }
+  - !bitset {name: ADDl,     mask: [27, 24], comment: Address of the USART node }
+  - !bitset {name: RTOEN,    mask: [23],     comment: Receiver timeout enable }
+  - !bitset {name: ABRMOD,   mask: [22, 21], comment: Auto baud rate mode }
+  - !bitset {name: ABREN,    mask: [20],     comment: Auto baud rate enable }
+  - !bitset {name: MSBFIRST, mask: [19],     comment: Most significant bit first }
+  - !bitset {name: DATAINV,  mask: [18],     comment: Binary data inversion }
+  - !bitset {name: TXINV,    mask: [17],     comment: TX pin active level inversion }
+  - !bitset {name: RXINV,    mask: [16],     comment: RX pin active level inversion }
+  - !bitset {name: SWAP,     mask: [15],     comment: Swap TX/RX pins }
+  - !bitset {name: LINEN,    mask: [14],     comment: LIN mode enable }
+  - !bitset {name: STOP,     mask: [13, 12], comment: STOP bits }
+  - !bitset {name: CLKEN,    mask: [11],     comment: Clock enable }
+  - !bitset {name: CPOL,     mask: [10],     comment: Clock polarity }
+  - !bitset {name: CPHA,     mask: [9],      comment: Clock phase }
+  - !bitset {name: LBCL,     mask: [8],      comment: Last bit clock pulse }
+  - !bitset {name: LBDIE,    mask: [6],      comment: LIN break detection interrupt enable }
+  - !bitset {name: LBDL,     mask: [5],      comment: LIN break detection length }
+  - !bitset {name: ADDM7,    mask: [4],      comment: 7-bit Address Detection/4-bit Address Detection }
+
+- !register
+  name: USART_BRR
+  comment: Baud rate register (USART_BRR)
+  bits:
+  - !bitset {name: BRR, mask: [15, 0] }
+
+- !register
+  name: USART_ISR
+  comment: Interrupt and status register (USART_ISR)
+  bits:
+  - !bitset {name: REACK, mask: [22], comment: Receive enable acknowledge flag }
+  - !bitset {name: TEACK, mask: [21], comment: Transmit enable acknowledge flag }
+  - !bitset {name: WUF,   mask: [20], comment: Wakeup from Stop mode flag }
+  - !bitset {name: RWU,   mask: [19], comment: Receiver wakeup from Mute mode }
+  - !bitset {name: SBKF,  mask: [18], comment: Send break flag }
+  - !bitset {name: CMF,   mask: [17], comment: Character match flag }
+  - !bitset {name: BUSY,  mask: [16], comment: Busy flag }
+  - !bitset {name: ABRF,  mask: [15], comment: Auto baud rate flag }
+  - !bitset {name: ABRE,  mask: [14], comment: Auto baud rate error }
+  - !bitset {name: EOBF,  mask: [12], comment: End of block flag }
+  - !bitset {name: RTOF,  mask: [11], comment: Receiver timeout }
+  - !bitset {name: CTS,   mask: [10], comment: CTS flag }
+  - !bitset {name: CTSIF, mask: [9],  comment: CTS interrupt flag }
+  - !bitset {name: LBDF,  mask: [8],  comment: LIN break detection flag }
+  - !bitset {name: TXE,   mask: [7],  comment: Transmit data register empty }
+  - !bitset {name: TC,    mask: [6],  comment: Transmission complete }
+  - !bitset {name: RXNE,  mask: [5],  comment: Read data register not empty }
+  - !bitset {name: IDLE,  mask: [4],  comment: Idle line detected }
+  - !bitset {name: ORE,   mask: [3],  comment: Overrun error }
+  - !bitset {name: NF,    mask: [2],  comment: START bit Noise detection flag }
+  - !bitset {name: FE,    mask: [1],  comment: Framing error }
+  - !bitset {name: PE,    mask: [0],  comment: Parity error }
+
+- !register
+  name: USART_RDR
+  comment: Receive data register (USART_RDR)
+  bits:
+  - !bitset {name: RDR, mask: [8, 0] }
+
+- !register
+  name: USART_TDR
+  comment: Transmit data register (USART_TDR)
+  bits:
+  - !bitset {name: TDR, mask: [8, 0] }

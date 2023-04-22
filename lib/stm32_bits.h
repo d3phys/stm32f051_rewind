@@ -1,3 +1,4 @@
+#pragma once
 
 
 /*         GPIO port mode register (GPIOx_MODER) (x = A..F)         */
@@ -260,6 +261,92 @@
 #define RCC_AHBENR_TSCEN                 ((uint32_t)0x00000004) /* Touch sensing controller clock enable */
 
 
+/*   GPIO alternate function low register (GPIOx_AFRL) (x = A..F)   */
+#define RCC_AFRL_AFSEL0                  ((uint32_t)0x0000000F)
+#define RCC_AFRL_AFSEL0_0                ((uint32_t)0x00000001) /* AFSEL0 bit 0 */
+#define RCC_AFRL_AFSEL0_1                ((uint32_t)0x00000002) /* AFSEL0 bit 1 */
+#define RCC_AFRL_AFSEL0_2                ((uint32_t)0x00000004) /* AFSEL0 bit 2 */
+#define RCC_AFRL_AFSEL0_3                ((uint32_t)0x00000008) /* AFSEL0 bit 3 */
+#define RCC_AFRL_AFSEL1                  ((uint32_t)0x000000F0)
+#define RCC_AFRL_AFSEL1_0                ((uint32_t)0x00000010) /* AFSEL1 bit 0 */
+#define RCC_AFRL_AFSEL1_1                ((uint32_t)0x00000020) /* AFSEL1 bit 1 */
+#define RCC_AFRL_AFSEL1_2                ((uint32_t)0x00000040) /* AFSEL1 bit 2 */
+#define RCC_AFRL_AFSEL1_3                ((uint32_t)0x00000080) /* AFSEL1 bit 3 */
+#define RCC_AFRL_AFSEL2                  ((uint32_t)0x00000F00)
+#define RCC_AFRL_AFSEL2_0                ((uint32_t)0x00000100) /* AFSEL2 bit 0 */
+#define RCC_AFRL_AFSEL2_1                ((uint32_t)0x00000200) /* AFSEL2 bit 1 */
+#define RCC_AFRL_AFSEL2_2                ((uint32_t)0x00000400) /* AFSEL2 bit 2 */
+#define RCC_AFRL_AFSEL2_3                ((uint32_t)0x00000800) /* AFSEL2 bit 3 */
+#define RCC_AFRL_AFSEL3                  ((uint32_t)0x0000F000)
+#define RCC_AFRL_AFSEL3_0                ((uint32_t)0x00001000) /* AFSEL3 bit 0 */
+#define RCC_AFRL_AFSEL3_1                ((uint32_t)0x00002000) /* AFSEL3 bit 1 */
+#define RCC_AFRL_AFSEL3_2                ((uint32_t)0x00004000) /* AFSEL3 bit 2 */
+#define RCC_AFRL_AFSEL3_3                ((uint32_t)0x00008000) /* AFSEL3 bit 3 */
+#define RCC_AFRL_AFSEL4                  ((uint32_t)0x000F0000)
+#define RCC_AFRL_AFSEL4_0                ((uint32_t)0x00010000) /* AFSEL4 bit 0 */
+#define RCC_AFRL_AFSEL4_1                ((uint32_t)0x00020000) /* AFSEL4 bit 1 */
+#define RCC_AFRL_AFSEL4_2                ((uint32_t)0x00040000) /* AFSEL4 bit 2 */
+#define RCC_AFRL_AFSEL4_3                ((uint32_t)0x00080000) /* AFSEL4 bit 3 */
+#define RCC_AFRL_AFSEL5                  ((uint32_t)0x00F00000)
+#define RCC_AFRL_AFSEL5_0                ((uint32_t)0x00100000) /* AFSEL5 bit 0 */
+#define RCC_AFRL_AFSEL5_1                ((uint32_t)0x00200000) /* AFSEL5 bit 1 */
+#define RCC_AFRL_AFSEL5_2                ((uint32_t)0x00400000) /* AFSEL5 bit 2 */
+#define RCC_AFRL_AFSEL5_3                ((uint32_t)0x00800000) /* AFSEL5 bit 3 */
+#define RCC_AFRL_AFSEL6                  ((uint32_t)0x0F000000)
+#define RCC_AFRL_AFSEL6_0                ((uint32_t)0x01000000) /* AFSEL6 bit 0 */
+#define RCC_AFRL_AFSEL6_1                ((uint32_t)0x02000000) /* AFSEL6 bit 1 */
+#define RCC_AFRL_AFSEL6_2                ((uint32_t)0x04000000) /* AFSEL6 bit 2 */
+#define RCC_AFRL_AFSEL6_3                ((uint32_t)0x08000000) /* AFSEL6 bit 3 */
+#define RCC_AFRL_AFSEL7                  ((uint32_t)0xF0000000)
+#define RCC_AFRL_AFSEL7_0                ((uint32_t)0x10000000) /* AFSEL7 bit 0 */
+#define RCC_AFRL_AFSEL7_1                ((uint32_t)0x20000000) /* AFSEL7 bit 1 */
+#define RCC_AFRL_AFSEL7_2                ((uint32_t)0x40000000) /* AFSEL7 bit 2 */
+#define RCC_AFRL_AFSEL7_3                ((uint32_t)0x80000000) /* AFSEL7 bit 3 */
+
+
+/*  GPIO alternate function high register (GPIOx_AFRH) (x = A..F)   */
+#define RCC_AFRH_AFSEL8                  ((uint32_t)0x0000000F)
+#define RCC_AFRH_AFSEL8_0                ((uint32_t)0x00000001) /* AFSEL8 bit 0 */
+#define RCC_AFRH_AFSEL8_1                ((uint32_t)0x00000002) /* AFSEL8 bit 1 */
+#define RCC_AFRH_AFSEL8_2                ((uint32_t)0x00000004) /* AFSEL8 bit 2 */
+#define RCC_AFRH_AFSEL8_3                ((uint32_t)0x00000008) /* AFSEL8 bit 3 */
+#define RCC_AFRH_AFSEL9                  ((uint32_t)0x000000F0)
+#define RCC_AFRH_AFSEL9_0                ((uint32_t)0x00000010) /* AFSEL9 bit 0 */
+#define RCC_AFRH_AFSEL9_1                ((uint32_t)0x00000020) /* AFSEL9 bit 1 */
+#define RCC_AFRH_AFSEL9_2                ((uint32_t)0x00000040) /* AFSEL9 bit 2 */
+#define RCC_AFRH_AFSEL9_3                ((uint32_t)0x00000080) /* AFSEL9 bit 3 */
+#define RCC_AFRH_AFSEL10                 ((uint32_t)0x00000F00)
+#define RCC_AFRH_AFSEL10_0               ((uint32_t)0x00000100) /* AFSEL10 bit 0 */
+#define RCC_AFRH_AFSEL10_1               ((uint32_t)0x00000200) /* AFSEL10 bit 1 */
+#define RCC_AFRH_AFSEL10_2               ((uint32_t)0x00000400) /* AFSEL10 bit 2 */
+#define RCC_AFRH_AFSEL10_3               ((uint32_t)0x00000800) /* AFSEL10 bit 3 */
+#define RCC_AFRH_AFSEL11                 ((uint32_t)0x0000F000)
+#define RCC_AFRH_AFSEL11_0               ((uint32_t)0x00001000) /* AFSEL11 bit 0 */
+#define RCC_AFRH_AFSEL11_1               ((uint32_t)0x00002000) /* AFSEL11 bit 1 */
+#define RCC_AFRH_AFSEL11_2               ((uint32_t)0x00004000) /* AFSEL11 bit 2 */
+#define RCC_AFRH_AFSEL11_3               ((uint32_t)0x00008000) /* AFSEL11 bit 3 */
+#define RCC_AFRH_AFSEL12                 ((uint32_t)0x000F0000)
+#define RCC_AFRH_AFSEL12_0               ((uint32_t)0x00010000) /* AFSEL12 bit 0 */
+#define RCC_AFRH_AFSEL12_1               ((uint32_t)0x00020000) /* AFSEL12 bit 1 */
+#define RCC_AFRH_AFSEL12_2               ((uint32_t)0x00040000) /* AFSEL12 bit 2 */
+#define RCC_AFRH_AFSEL12_3               ((uint32_t)0x00080000) /* AFSEL12 bit 3 */
+#define RCC_AFRH_AFSEL13                 ((uint32_t)0x00F00000)
+#define RCC_AFRH_AFSEL13_0               ((uint32_t)0x00100000) /* AFSEL13 bit 0 */
+#define RCC_AFRH_AFSEL13_1               ((uint32_t)0x00200000) /* AFSEL13 bit 1 */
+#define RCC_AFRH_AFSEL13_2               ((uint32_t)0x00400000) /* AFSEL13 bit 2 */
+#define RCC_AFRH_AFSEL13_3               ((uint32_t)0x00800000) /* AFSEL13 bit 3 */
+#define RCC_AFRH_AFSEL14                 ((uint32_t)0x0F000000)
+#define RCC_AFRH_AFSEL14_0               ((uint32_t)0x01000000) /* AFSEL14 bit 0 */
+#define RCC_AFRH_AFSEL14_1               ((uint32_t)0x02000000) /* AFSEL14 bit 1 */
+#define RCC_AFRH_AFSEL14_2               ((uint32_t)0x04000000) /* AFSEL14 bit 2 */
+#define RCC_AFRH_AFSEL14_3               ((uint32_t)0x08000000) /* AFSEL14 bit 3 */
+#define RCC_AFRH_AFSEL15                 ((uint32_t)0xF0000000)
+#define RCC_AFRH_AFSEL15_0               ((uint32_t)0x10000000) /* AFSEL15 bit 0 */
+#define RCC_AFRH_AFSEL15_1               ((uint32_t)0x20000000) /* AFSEL15 bit 1 */
+#define RCC_AFRH_AFSEL15_2               ((uint32_t)0x40000000) /* AFSEL15 bit 2 */
+#define RCC_AFRH_AFSEL15_3               ((uint32_t)0x80000000) /* AFSEL15 bit 3 */
+
+
 /*                 Clock control register (RCC_CR)                  */
 #define RCC_CR_HSION                     ((uint32_t)0x00000001) /* HSI clock enable */
 #define RCC_CR_HSIRDY                    ((uint32_t)0x00000002) /* HSI clock ready flag */
@@ -330,6 +417,37 @@
 #define RCC_CFGR2_PREDIV_1               ((uint32_t)0x00000002) /* PREDIV bit 1 */
 #define RCC_CFGR2_PREDIV_2               ((uint32_t)0x00000004) /* PREDIV bit 2 */
 #define RCC_CFGR2_PREDIV_3               ((uint32_t)0x00000008) /* PREDIV bit 3 */
+
+
+/*            Clock configuration register 3 (RCC_CFGR)             */
+#define RCC_CFGR3_USART3SW               ((uint32_t)0x000C0000) /* USART3 clock source selection (available only on STM32F09x devices) */
+#define RCC_CFGR3_USART3SW_0             ((uint32_t)0x00040000) /* USART3SW bit 0 */
+#define RCC_CFGR3_USART3SW_1             ((uint32_t)0x00080000) /* USART3SW bit 1 */
+#define RCC_CFGR3_USART2SW               ((uint32_t)0x00030000) /* USART2 clock source selection (available only on STM32F07x and STM32F09x devices) */
+#define RCC_CFGR3_USART2SW_0             ((uint32_t)0x00010000) /* USART2SW bit 0 */
+#define RCC_CFGR3_USART2SW_1             ((uint32_t)0x00020000) /* USART2SW bit 1 */
+#define RCC_CFGR3_ADCSW                  ((uint32_t)0x00000100) /* ADC clock source selection */
+#define RCC_CFGR3_USBSW                  ((uint32_t)0x00000080) /* USB clock source selection */
+#define RCC_CFGR3_CECSW                  ((uint32_t)0x00000040) /* HDMI CEC clock source selection */
+#define RCC_CFGR3_I2C1SW                 ((uint32_t)0x00000010) /* I2C1 clock source selection */
+#define RCC_CFGR3_USART1SW               ((uint32_t)0x00000003) /* USART1 clock source selection */
+#define RCC_CFGR3_USART1SW_0             ((uint32_t)0x00000001) /* USART1SW bit 0 */
+#define RCC_CFGR3_USART1SW_1             ((uint32_t)0x00000002) /* USART1SW bit 1 */
+
+
+/*       APB peripheral clock enable register 2 (RCC_APB2ENR)       */
+#define RCC_APB2ENR_DBGMCUEN             ((uint32_t)0x00400000) /* MCU debug module clock enable */
+#define RCC_APB2ENR_TIM17EN              ((uint32_t)0x00040000) /* TIM17 timer clock enable */
+#define RCC_APB2ENR_TIM16EN              ((uint32_t)0x00020000) /* TIM16 timer clock enable */
+#define RCC_APB2ENR_TIM15EN              ((uint32_t)0x00010000) /* TIM15 timer clock enable */
+#define RCC_APB2ENR_USART1EN             ((uint32_t)0x00004000) /* USART1 clock enable */
+#define RCC_APB2ENR_SPI1EN               ((uint32_t)0x00001000) /* SPI1 clock enable */
+#define RCC_APB2ENR_TIM1EN               ((uint32_t)0x00000800) /* TIM1 timer clock enable */
+#define RCC_APB2ENR_ADCEN                ((uint32_t)0x00000200) /* ADC interface clock enable */
+#define RCC_APB2ENR_USART8EN             ((uint32_t)0x00000080) /* USART8 clock enable */
+#define RCC_APB2ENR_USART7EN             ((uint32_t)0x00000040) /* USART7 clock enable */
+#define RCC_APB2ENR_USART6EN             ((uint32_t)0x00000020) /* USART6 clock enable */
+#define RCC_APB2ENR_SYSCFGCOMPEN         ((uint32_t)0x00000001) /* SYSCFG & COMP clock enable */
 
 
 /*               SysTick Control and Status Register                */
@@ -423,3 +541,176 @@
 #define SYST_CALIB_TENMS_23              ((uint32_t)0x00800000) /* TENMS bit 23 */
 #define SYST_CALIB_SKEW                  ((uint32_t)0x40000000) /* Indicates whether the TENMS value is exact */
 #define SYST_CALIB_NOREF                 ((uint32_t)0x80000000) /* Indicates whether the device provides a reference clock to the processor */
+
+
+/*                SysTick Calibration Value Register                */
+#define USART_CR1_M1                     ((uint32_t)0x10000000) /* Word length */
+#define USART_CR1_EOBIE                  ((uint32_t)0x08000000) /* End of Block interrupt enable */
+#define USART_CR1_RTOIE                  ((uint32_t)0x04000000) /* Receiver timeout interrupt enable */
+#define USART_CR1_DEAT                   ((uint32_t)0x03E00000) /* Driver Enable assertion time */
+#define USART_CR1_DEAT_0                 ((uint32_t)0x00200000) /* DEAT bit 0 */
+#define USART_CR1_DEAT_1                 ((uint32_t)0x00400000) /* DEAT bit 1 */
+#define USART_CR1_DEAT_2                 ((uint32_t)0x00800000) /* DEAT bit 2 */
+#define USART_CR1_DEAT_3                 ((uint32_t)0x01000000) /* DEAT bit 3 */
+#define USART_CR1_DEAT_4                 ((uint32_t)0x02000000) /* DEAT bit 4 */
+#define USART_CR1_DEDT                   ((uint32_t)0x001F0000) /* Driver Enable de-assertion time */
+#define USART_CR1_DEDT_0                 ((uint32_t)0x00010000) /* DEDT bit 0 */
+#define USART_CR1_DEDT_1                 ((uint32_t)0x00020000) /* DEDT bit 1 */
+#define USART_CR1_DEDT_2                 ((uint32_t)0x00040000) /* DEDT bit 2 */
+#define USART_CR1_DEDT_3                 ((uint32_t)0x00080000) /* DEDT bit 3 */
+#define USART_CR1_DEDT_4                 ((uint32_t)0x00100000) /* DEDT bit 4 */
+#define USART_CR1_OVER8                  ((uint32_t)0x00008000) /* Oversampling mode */
+#define USART_CR1_CMIE                   ((uint32_t)0x00004000) /* Character match interrupt enable */
+#define USART_CR1_MME                    ((uint32_t)0x00002000) /* Mute mode enable */
+#define USART_CR1_M0                     ((uint32_t)0x00001000) /* Word length */
+#define USART_CR1_WAKE                   ((uint32_t)0x00000800) /* Receiver wakeup method */
+#define USART_CR1_PCE                    ((uint32_t)0x00000400) /* Parity control enable */
+#define USART_CR1_PS                     ((uint32_t)0x00000200) /* Parity selection */
+#define USART_CR1_PEIE                   ((uint32_t)0x00000100) /* PE interrupt enable */
+#define USART_CR1_TXEIE                  ((uint32_t)0x00000080) /* Interrupt enable */
+#define USART_CR1_TCIE                   ((uint32_t)0x00000040) /* Transmission complete interrupt enable */
+#define USART_CR1_RXNEIE                 ((uint32_t)0x00000020) /* RXNE interrupt enable */
+#define USART_CR1_IDLEIE                 ((uint32_t)0x00000010) /* IDLE interrupt enable */
+#define USART_CR1_TE                     ((uint32_t)0x00000008) /* Transmitter enable */
+#define USART_CR1_RE                     ((uint32_t)0x00000004) /* Receiver enable */
+#define USART_CR1_UESM                   ((uint32_t)0x00000002) /* USART enable in Stop mode */
+#define USART_CR1_UE                     ((uint32_t)0x00000001) /* USART enable */
+
+
+/*                  Control register 1 (USART_CR1)                  */
+#define USART_CR1_M1                     ((uint32_t)0x10000000) /* Word length */
+#define USART_CR1_EOBIE                  ((uint32_t)0x08000000) /* End of Block interrupt enable */
+#define USART_CR1_RTOIE                  ((uint32_t)0x04000000) /* Receiver timeout interrupt enable */
+#define USART_CR1_DEAT                   ((uint32_t)0x03E00000) /* Driver Enable assertion time */
+#define USART_CR1_DEAT_0                 ((uint32_t)0x00200000) /* DEAT bit 0 */
+#define USART_CR1_DEAT_1                 ((uint32_t)0x00400000) /* DEAT bit 1 */
+#define USART_CR1_DEAT_2                 ((uint32_t)0x00800000) /* DEAT bit 2 */
+#define USART_CR1_DEAT_3                 ((uint32_t)0x01000000) /* DEAT bit 3 */
+#define USART_CR1_DEAT_4                 ((uint32_t)0x02000000) /* DEAT bit 4 */
+#define USART_CR1_DEDT                   ((uint32_t)0x001F0000) /* Driver Enable de-assertion time */
+#define USART_CR1_DEDT_0                 ((uint32_t)0x00010000) /* DEDT bit 0 */
+#define USART_CR1_DEDT_1                 ((uint32_t)0x00020000) /* DEDT bit 1 */
+#define USART_CR1_DEDT_2                 ((uint32_t)0x00040000) /* DEDT bit 2 */
+#define USART_CR1_DEDT_3                 ((uint32_t)0x00080000) /* DEDT bit 3 */
+#define USART_CR1_DEDT_4                 ((uint32_t)0x00100000) /* DEDT bit 4 */
+#define USART_CR1_OVER8                  ((uint32_t)0x00008000) /* Oversampling mode */
+#define USART_CR1_CMIE                   ((uint32_t)0x00004000) /* Character match interrupt enable */
+#define USART_CR1_MME                    ((uint32_t)0x00002000) /* Mute mode enable */
+#define USART_CR1_M0                     ((uint32_t)0x00001000) /* Word length */
+#define USART_CR1_WAKE                   ((uint32_t)0x00000800) /* Receiver wakeup method */
+#define USART_CR1_PCE                    ((uint32_t)0x00000400) /* Parity control enable */
+#define USART_CR1_PS                     ((uint32_t)0x00000200) /* Parity selection */
+#define USART_CR1_PEIE                   ((uint32_t)0x00000100) /* PE interrupt enable */
+#define USART_CR1_TXEIE                  ((uint32_t)0x00000080) /* Interrupt enable */
+#define USART_CR1_TCIE                   ((uint32_t)0x00000040) /* Transmission complete interrupt enable */
+#define USART_CR1_RXNEIE                 ((uint32_t)0x00000020) /* RXNE interrupt enable */
+#define USART_CR1_IDLEIE                 ((uint32_t)0x00000010) /* IDLE interrupt enable */
+#define USART_CR1_TE                     ((uint32_t)0x00000008) /* Transmitter enable */
+#define USART_CR1_RE                     ((uint32_t)0x00000004) /* Receiver enable */
+#define USART_CR1_UESM                   ((uint32_t)0x00000002) /* USART enable in Stop mode */
+#define USART_CR1_UE                     ((uint32_t)0x00000001) /* USART enable */
+
+
+/*                  Control register 2 (USART_CR2)                  */
+#define USART_CR2_ADDh                   ((uint32_t)0xF0000000) /* Address of the USART node */
+#define USART_CR2_ADDh_0                 ((uint32_t)0x10000000) /* ADDh bit 0 */
+#define USART_CR2_ADDh_1                 ((uint32_t)0x20000000) /* ADDh bit 1 */
+#define USART_CR2_ADDh_2                 ((uint32_t)0x40000000) /* ADDh bit 2 */
+#define USART_CR2_ADDh_3                 ((uint32_t)0x80000000) /* ADDh bit 3 */
+#define USART_CR2_ADDl                   ((uint32_t)0x0F000000) /* Address of the USART node */
+#define USART_CR2_ADDl_0                 ((uint32_t)0x01000000) /* ADDl bit 0 */
+#define USART_CR2_ADDl_1                 ((uint32_t)0x02000000) /* ADDl bit 1 */
+#define USART_CR2_ADDl_2                 ((uint32_t)0x04000000) /* ADDl bit 2 */
+#define USART_CR2_ADDl_3                 ((uint32_t)0x08000000) /* ADDl bit 3 */
+#define USART_CR2_RTOEN                  ((uint32_t)0x00800000) /* Receiver timeout enable */
+#define USART_CR2_ABRMOD                 ((uint32_t)0x00600000) /* Auto baud rate mode */
+#define USART_CR2_ABRMOD_0               ((uint32_t)0x00200000) /* ABRMOD bit 0 */
+#define USART_CR2_ABRMOD_1               ((uint32_t)0x00400000) /* ABRMOD bit 1 */
+#define USART_CR2_ABREN                  ((uint32_t)0x00100000) /* Auto baud rate enable */
+#define USART_CR2_MSBFIRST               ((uint32_t)0x00080000) /* Most significant bit first */
+#define USART_CR2_DATAINV                ((uint32_t)0x00040000) /* Binary data inversion */
+#define USART_CR2_TXINV                  ((uint32_t)0x00020000) /* TX pin active level inversion */
+#define USART_CR2_RXINV                  ((uint32_t)0x00010000) /* RX pin active level inversion */
+#define USART_CR2_SWAP                   ((uint32_t)0x00008000) /* Swap TX/RX pins */
+#define USART_CR2_LINEN                  ((uint32_t)0x00004000) /* LIN mode enable */
+#define USART_CR2_STOP                   ((uint32_t)0x00003000) /* STOP bits */
+#define USART_CR2_STOP_0                 ((uint32_t)0x00001000) /* STOP bit 0 */
+#define USART_CR2_STOP_1                 ((uint32_t)0x00002000) /* STOP bit 1 */
+#define USART_CR2_CLKEN                  ((uint32_t)0x00000800) /* Clock enable */
+#define USART_CR2_CPOL                   ((uint32_t)0x00000400) /* Clock polarity */
+#define USART_CR2_CPHA                   ((uint32_t)0x00000200) /* Clock phase */
+#define USART_CR2_LBCL                   ((uint32_t)0x00000100) /* Last bit clock pulse */
+#define USART_CR2_LBDIE                  ((uint32_t)0x00000040) /* LIN break detection interrupt enable */
+#define USART_CR2_LBDL                   ((uint32_t)0x00000020) /* LIN break detection length */
+#define USART_CR2_ADDM7                  ((uint32_t)0x00000010) /* 7-bit Address Detection/4-bit Address Detection */
+
+
+/*                  Baud rate register (USART_BRR)                  */
+#define USART_BRR_BRR                    ((uint32_t)0x0000FFFF)
+#define USART_BRR_BRR_0                  ((uint32_t)0x00000001) /* BRR bit 0 */
+#define USART_BRR_BRR_1                  ((uint32_t)0x00000002) /* BRR bit 1 */
+#define USART_BRR_BRR_2                  ((uint32_t)0x00000004) /* BRR bit 2 */
+#define USART_BRR_BRR_3                  ((uint32_t)0x00000008) /* BRR bit 3 */
+#define USART_BRR_BRR_4                  ((uint32_t)0x00000010) /* BRR bit 4 */
+#define USART_BRR_BRR_5                  ((uint32_t)0x00000020) /* BRR bit 5 */
+#define USART_BRR_BRR_6                  ((uint32_t)0x00000040) /* BRR bit 6 */
+#define USART_BRR_BRR_7                  ((uint32_t)0x00000080) /* BRR bit 7 */
+#define USART_BRR_BRR_8                  ((uint32_t)0x00000100) /* BRR bit 8 */
+#define USART_BRR_BRR_9                  ((uint32_t)0x00000200) /* BRR bit 9 */
+#define USART_BRR_BRR_10                 ((uint32_t)0x00000400) /* BRR bit 10 */
+#define USART_BRR_BRR_11                 ((uint32_t)0x00000800) /* BRR bit 11 */
+#define USART_BRR_BRR_12                 ((uint32_t)0x00001000) /* BRR bit 12 */
+#define USART_BRR_BRR_13                 ((uint32_t)0x00002000) /* BRR bit 13 */
+#define USART_BRR_BRR_14                 ((uint32_t)0x00004000) /* BRR bit 14 */
+#define USART_BRR_BRR_15                 ((uint32_t)0x00008000) /* BRR bit 15 */
+
+
+/*            Interrupt and status register (USART_ISR)             */
+#define USART_ISR_REACK                  ((uint32_t)0x00400000) /* Receive enable acknowledge flag */
+#define USART_ISR_TEACK                  ((uint32_t)0x00200000) /* Transmit enable acknowledge flag */
+#define USART_ISR_WUF                    ((uint32_t)0x00100000) /* Wakeup from Stop mode flag */
+#define USART_ISR_RWU                    ((uint32_t)0x00080000) /* Receiver wakeup from Mute mode */
+#define USART_ISR_SBKF                   ((uint32_t)0x00040000) /* Send break flag */
+#define USART_ISR_CMF                    ((uint32_t)0x00020000) /* Character match flag */
+#define USART_ISR_BUSY                   ((uint32_t)0x00010000) /* Busy flag */
+#define USART_ISR_ABRF                   ((uint32_t)0x00008000) /* Auto baud rate flag */
+#define USART_ISR_ABRE                   ((uint32_t)0x00004000) /* Auto baud rate error */
+#define USART_ISR_EOBF                   ((uint32_t)0x00001000) /* End of block flag */
+#define USART_ISR_RTOF                   ((uint32_t)0x00000800) /* Receiver timeout */
+#define USART_ISR_CTS                    ((uint32_t)0x00000400) /* CTS flag */
+#define USART_ISR_CTSIF                  ((uint32_t)0x00000200) /* CTS interrupt flag */
+#define USART_ISR_LBDF                   ((uint32_t)0x00000100) /* LIN break detection flag */
+#define USART_ISR_TXE                    ((uint32_t)0x00000080) /* Transmit data register empty */
+#define USART_ISR_TC                     ((uint32_t)0x00000040) /* Transmission complete */
+#define USART_ISR_RXNE                   ((uint32_t)0x00000020) /* Read data register not empty */
+#define USART_ISR_IDLE                   ((uint32_t)0x00000010) /* Idle line detected */
+#define USART_ISR_ORE                    ((uint32_t)0x00000008) /* Overrun error */
+#define USART_ISR_NF                     ((uint32_t)0x00000004) /* START bit Noise detection flag */
+#define USART_ISR_FE                     ((uint32_t)0x00000002) /* Framing error */
+#define USART_ISR_PE                     ((uint32_t)0x00000001) /* Parity error */
+
+
+/*                Receive data register (USART_RDR)                 */
+#define USART_RDR_RDR                    ((uint32_t)0x000001FF)
+#define USART_RDR_RDR_0                  ((uint32_t)0x00000001) /* RDR bit 0 */
+#define USART_RDR_RDR_1                  ((uint32_t)0x00000002) /* RDR bit 1 */
+#define USART_RDR_RDR_2                  ((uint32_t)0x00000004) /* RDR bit 2 */
+#define USART_RDR_RDR_3                  ((uint32_t)0x00000008) /* RDR bit 3 */
+#define USART_RDR_RDR_4                  ((uint32_t)0x00000010) /* RDR bit 4 */
+#define USART_RDR_RDR_5                  ((uint32_t)0x00000020) /* RDR bit 5 */
+#define USART_RDR_RDR_6                  ((uint32_t)0x00000040) /* RDR bit 6 */
+#define USART_RDR_RDR_7                  ((uint32_t)0x00000080) /* RDR bit 7 */
+#define USART_RDR_RDR_8                  ((uint32_t)0x00000100) /* RDR bit 8 */
+
+
+/*                Transmit data register (USART_TDR)                */
+#define USART_TDR_TDR                    ((uint32_t)0x000001FF)
+#define USART_TDR_TDR_0                  ((uint32_t)0x00000001) /* TDR bit 0 */
+#define USART_TDR_TDR_1                  ((uint32_t)0x00000002) /* TDR bit 1 */
+#define USART_TDR_TDR_2                  ((uint32_t)0x00000004) /* TDR bit 2 */
+#define USART_TDR_TDR_3                  ((uint32_t)0x00000008) /* TDR bit 3 */
+#define USART_TDR_TDR_4                  ((uint32_t)0x00000010) /* TDR bit 4 */
+#define USART_TDR_TDR_5                  ((uint32_t)0x00000020) /* TDR bit 5 */
+#define USART_TDR_TDR_6                  ((uint32_t)0x00000040) /* TDR bit 6 */
+#define USART_TDR_TDR_7                  ((uint32_t)0x00000080) /* TDR bit 7 */
+#define USART_TDR_TDR_8                  ((uint32_t)0x00000100) /* TDR bit 8 */

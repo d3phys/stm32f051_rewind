@@ -1,18 +1,20 @@
 #ifndef BITWISE_H
 #define BITWISE_H
 #include <stdint.h>
+#include <stdbool.h>
 
 void
 inverse_bits( volatile uint32_t* reg_addr,
               uint32_t mask)
 {
-    *reg_addr = (*reg_addr & (~mask)) | (~(*reg_addr & mask));
+    //*reg_addr = (*reg_addr & (~mask)) | (~(*reg_addr & mask));
+    *reg_addr = *reg_addr ^ mask;
 }
 
 void
 mask_bits( volatile uint32_t* reg_addr,
-            uint32_t mask,
-            uint32_t value)
+           uint32_t mask,
+           uint32_t value)
 {
     *reg_addr = (*reg_addr & (~mask)) | (value & mask);
 }
